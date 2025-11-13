@@ -1,0 +1,99 @@
+var StaffPhotoCom = {
+	
+	lazyLoaded: false,
+		
+	onload: function() {
+		if (this.src.match("/apps/pics/spacer.gif")) {
+			return;
+		}
+			
+		if (this.clientHeight < this.clientWidth) {
+			this.setAttribute('height', '100%');
+			this.removeAttribute('width');
+		}
+		//this.style.left='-' + (this.clientWidth/2) + 'px';
+		//this.style.top='-' + (this.clientHeight/2) + 'px';
+		this.className = this.className.replace(/staffPhotoHidden/gi, "");
+		 
+		var eles = this.parentNode.getElementsByTagName("div");
+		for (var i = 0; i < eles.length; i++) {
+			var ele = eles[i];
+			if (ele.getAttribute("name") == "staffPhotoLoader") {
+				ele.parentNode.removeChild(ele);
+				break;
+			}
+		}
+		// Remove placeholder image after successful load
+		var imgs = this.parentNode.getElementsByTagName("img");
+		for (var i = imgs.length - 1; i >= 0; i--) {
+			var img = imgs[i];
+			if (img.getAttribute("src") === "/apps/pics/blank_profile_public.png") {
+				img.parentNode.removeChild(img);
+			}
+		}
+	},
+	
+	onerror: function(e) {
+		if (window.jQuery) {
+			jQuery(this).parent().find(".staffPhotoLoader").remove();
+		}
+	},
+	
+	writeTemplate: function(opts) {
+		try {
+			if (document.readyState == "complete") return;
+			
+			var className = " staffPhotoWrapper ";
+			var shapeClassName;
+			if (opts.shape == "round") {
+				shapeClassName = "Round";
+			} else if (opts.shape == "square") {
+				shapeClassName = "Square";
+			}
+			className += ' staffPhotoWrapper' + shapeClassName;
+			
+			var thisHTML = '<div class="' + className + '"';
+			if (opts.id) {
+				thisHTML += 'id="' + opts.id + '"';
+			}
+			if (opts.readonly) {
+				thisHTML += 'readonly="readonly"';
+			}
+			thisHTML += '">';
+
+			let altText = opts.who ? `${opts.who.replace('"', "&quot;")}'s staff photo` : "";
+			if (!opts.rel) {
+				thisHTML += `<img class="staffPhotoBlank" alt="${altText}" src="/apps/pics/blank_profile_public.png" width="100%">`;
+				thisHTML += '<img class="staffPhoto" alt="Spacer" src="/apps/pics/spacer.gif" width="100%">';
+			} else {
+				thisHTML += `<img class="staffPhotoBlank" alt="${altText}" src="/apps/pics/blank_profile_public.png" width="100%">`;
+				thisHTML += '<div class="staffPhotoLoader" name="staffPhotoLoader"></div>';
+				if (!opts.lazy) {
+					thisHTML += `<img class="staffPhoto staffPhotoHidden" width="100%" alt="${altText}" src="${opts.rel}" onload="StaffPhotoCom.onload.call(this)" onerror="StaffPhotoCom.onerror.call(this)">`;
+				} else {
+					thisHTML += `<img class="staffPhoto staffPhotoHidden lazy" alt="${altText}" data-original="${opts.rel}" onload="StaffPhotoCom.onload.call(this)" onerror="StaffPhotoCom.onerror.call(this)">`;
+				}
+			}
+			thisHTML += '</div>';
+
+			document.write(thisHTML);
+		} catch(e) {
+			console.error(e);
+		}
+		
+		if (opts.lazy && window.jQuery && !StaffPhotoCom.lazyLoaded) {
+			StaffPhotoCom.lazyLoaded = true;
+			
+			$(window).load(function() {
+				$("head").append(unescape('%3Cscript src="/apps/js/jquery/jquery.lazyload-pack.js"%3E%3C/script%3E'));
+				$("img.lazy").lazyload({
+					skip_invisible: false
+				});
+			});
+		}
+	},
+		
+	isLoaded : function() {
+		return true;
+	}
+}

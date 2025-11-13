@@ -1,0 +1,80 @@
+class ENResponsiveDiv extends HTMLDivElement {
+	static #responsiveDivs = new Set();
+
+	static #initClass = (function() {
+		customElements.define("en-responsive-div", ENResponsiveDiv, { extends: "div" });
+		window.addEventListener("resize", function (e) {
+			ENResponsiveDiv.#responsiveDivs.forEach(function (responsiveDiv) {
+				responsiveDiv.enRender();
+			});
+		});
+		if (!(document.createElement("div", { is: "en-responsive-div" }) instanceof ENResponsiveDiv)) { //safari
+			document.querySelectorAll("div[is='en-responsive-div']").forEach(function (div) {
+				if (!(div instanceof ENResponsiveDiv)) {
+					ENResponsiveDiv.initElement(div);
+				}
+			});
+		}
+	})();
+	
+	static get observedAttributes() {
+		return ['style'];
+	}
+	
+	constructor() {
+		super();
+		if (this.isConnected) {
+			ENResponsiveDiv.initElement(this);
+		}
+	}
+	
+	static initElement(element) {
+		ENResponsiveDiv.#responsiveDivs.add(element);
+		let shadowRoot = element.attachShadow({ mode: 'closed' });
+		shadowRoot.innerHTML = `
+			<style>
+			slot {
+				width: 100%; height: 100%;
+				display: inline-block; transform-origin: 0 0; transform: scale(var(--scale));
+			}
+			</style>
+			<slot />
+		`;
+
+		let hostStyleSheet = document.createElement("style");
+		hostStyleSheet.innerHTML = `:host { max-height: calc(var(--orig-height) * var(--scale))!important; }`;
+		shadowRoot.prepend(hostStyleSheet);
+		let hostCssRule = hostStyleSheet.sheet.cssRules[0];
+
+		let origWidth, origHeight, scale = 1;
+		element.enRender = function(syncOrigDimensions) {
+			if (syncOrigDimensions) {
+				origWidth = parseFloat(element.style.width || 0);
+				origHeight = parseFloat(element.style.height || 0);
+				hostCssRule.style.setProperty("--orig-width", `${origWidth}px`);
+				hostCssRule.style.setProperty("--orig-height", `${origHeight}px`);
+			}
+			if (origWidth > 0) {
+				scale = Math.min(1,
+					Math.round(parseFloat(window.getComputedStyle(element).width)) / origWidth
+				);
+			}
+			hostCssRule.style.setProperty("--scale", scale);
+		};
+		Object.defineProperty(element, "enScale", {
+			get() {
+				return scale;
+			}
+		});
+
+		if (!(element instanceof ENResponsiveDiv)) {
+			element.enRender(true);
+		}
+	};
+	
+	attributeChangedCallback(name, oldValue, newValue) {
+		if (this.enRender) {
+			this.enRender(true);
+		}
+	}
+}

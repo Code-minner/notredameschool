@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'NoSpace';
+  src: url('/apps/shared/fonts/zerowidthspaces.eot');
+  src: url('/apps/shared/fonts/zerowidthspaces.eot?#iefix') format('embedded-opentype'), url('/apps/shared/fonts/zerowidthspaces.woff') format('woff'), url('/apps/shared/fonts/zerowidthspaces.ttf') format('truetype'), url('/apps/shared/fonts/zerowidthspaces.svg#NoSpace') format('svg');
+}
+.staffPhotoWrapper {
+  /*display: inline-block; border-radius: 3px; padding: 5px; box-shadow: rgba(0, 0, 0, .2) 0 0 12px; -webkit-box-shadow: rgba(0, 0, 0, .2) 0 0 12px; -moz-box-shadow: rgba(0,0,0,.2) 0 0 12px; background: #FFF; position: relative; width: 192px; height: 192px; float: right; behavior: url(/apps/shared/pie2.htc);*/
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  border: 3px solid #FFF;
+  padding: 0;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2) ;
+  -webkit-box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.2) ;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  behavior: url(/apps/shared/pie2.htc);
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.staffPhotoWrapper.staffPhotoWrapperRound {
+  -webkit-border-radius: 96px;
+  -moz-border-radius: 96px;
+  border-radius: 96px;
+  behavior: url(/apps/shared/pie2.htc);
+}
+.staffPhotoWrapper.staffPhotoWrapperRound .staffPhotoBlank {
+  -webkit-border-radius: 96px;
+  -moz-border-radius: 96px;
+  border-radius: 96px;
+  behavior: url(/apps/shared/pie2.htc);
+}
+.staffPhotoWrapper.staffPhotoWrapperRound .staffPhoto {
+  -webkit-border-radius: 96px;
+  -moz-border-radius: 96px;
+  border-radius: 96px;
+  behavior: url(/apps/shared/pie2.htc);
+}
+.staffPhotoWrapper .staffPhotoBlank {
+  position: absolute;
+}
+.staffPhotoWrapper .staffPhotoLoader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.staffPhotoWrapper .staffPhotoLoader {
+  background: url(/apps/pics/loading_nav.gif) center no-repeat #ffffff;
+  opacity: .5;
+  margin: -2px 0 0 -1px;
+}
+.staffPhotoWrapper img.staffPhoto {
+  margin-left: 50%;
+  margin-top: 50%;
+  left: -50%;
+  top: -50%;
+  position: relative;
+}
+.staffPhotoWrapper img.staffPhoto.staffPhotoHidden {
+  visibility: hidden;
+}

@@ -1,0 +1,143 @@
+var PagesPublic = {
+
+	initialized: false,
+	
+	type: null,
+	
+	init: function() {
+	},
+	
+	/**
+	 * @param {{isStaffPhotoRound:Boolean,isNavLeftPositioned:Boolean,showAside:Boolean,isStaffPhotoOverlayed:Boolean}} opts
+	 */
+	initStaff: function(opts) {		
+		if (opts.showAside) {
+			var $pageNav = $("#pageNav");
+			if ($pageNav.length === 0) {
+				return;
+			}
+			
+			var $pageTitle = $(".pageTitle");
+
+			var hasPageNavBackground = false;
+			$pageNav.find("ul:eq(0), ul:eq(0) li").andSelf().each(function() { var $this = $(this);
+				if ($this.css("background-color") !== "rgba(0, 0, 0, 0)" || $this.css("background-image") !== "none") {
+					hasPageNavBackground = true;
+					return false;
+				}
+			});
+			
+			var hasPageTitleCSSTextTransformUppercase = false;
+			var hasPageTitleCSSTextTransformLowercase = false;
+			$pageTitle.find("*").andSelf().each(function() { var $this = $(this);
+				if ($this.css("text-transform").match(/uppercase/i)) {
+					hasPageTitleCSSTextTransformUppercase = true;
+					return false;
+				} else if ($this.css("text-transform").match(/lowercase/i)) {
+					hasPageTitleCSSTextTransformLowercase = true;
+					return false;
+				}
+			});
+
+			if (hasPageNavBackground && opts.isDynamicTextColor) {
+				var tempFunc = function() {
+					var pageAsideWrapperLinkColor = $("#STAFF_MULTI_PAGE_W_ASIDE #pageAsideWrapper li a").css("color");
+					
+					if (opts.isStaffPhotosEnabled && opts.isStaffPhotoRound) {
+						$("#STAFF_MULTI_PAGE_W_ASIDE.staffPageRoundPhoto #pageAsideWrapper li#staffNavOverviewWrapper dl").find("*").andSelf().each(function() {
+							this.style.setProperty("color", pageAsideWrapperLinkColor, "important");	
+						});
+					}
+	
+					$("#STAFF_MULTI_PAGE_W_ASIDE #pageAsideWrapper li#staffNavContactWrapper").find("*").andSelf().each(function() {
+						this.style.setProperty("color", pageAsideWrapperLinkColor, "important");	
+					});
+				};
+				if (document.readyState == "complete") {
+					tempFunc();
+				} else {
+					$(window).load(tempFunc);
+				}
+			}
+			
+			if (opts.isStaffPhotosEnabled) {		
+				var $staffOverviewWrapperEle = $(".staffOverviewWrapper");
+				
+				var extraMarginBottom = parseInt($staffOverviewWrapperEle.css("margin-bottom"));
+				
+				$staffOverviewWrapperEle[0].style.setProperty("margin-top", "0px", "important");
+				$staffOverviewWrapperEle[0].style.setProperty("margin-bottom", "0px", "important");
+				
+				var pageNavFirstCharOffsetTop = 0; 
+				var photoOffsetBottom = 40;
+				
+				if (opts.isStaffPhotoOverlayed) {
+					if (!hasPageTitleCSSTextTransformUppercase && !hasPageTitleCSSTextTransformLowercase) {
+						$pageTitle.find("*").andSelf().css("text-transform", "none");
+					}
+					
+					var $pageTitleTextEle = $pageTitle.find("*:not(:empty)").andSelf().last();
+					var textNode = $pageTitleTextEle[0].childNodes[0];
+					if (textNode.nodeValue && textNode.nodeValue.length > 0 && textNode.nodeValue.match(/[ a-z0-9]/i)) {
+						var firstChar = (textNode.nodeValue.match(/[a-z0-9]/i) ? textNode.nodeValue.match(/[a-z0-9]/i)[0] : textNode.nodeValue.match(/ /i));
+						textNode.nodeValue = textNode.nodeValue.replace(firstChar, "");
+					
+						var $textNode = $(textNode).wrap("<span></span>").parent().css("display", "inline-block");
+						var $firstChar = $("<span>" + firstChar + "</span>").css("display", "inline-block").insertBefore($textNode);
+					
+						var lineHeight = parseInt($firstChar.css("line-height")) || 0;
+						var firstCharTop = $firstChar.offset().top - (parseInt($firstChar.css("font-size")) - lineHeight) / 2;
+						pageNavFirstCharOffsetTop = ($("#pageNav").offset().top - firstCharTop) - 10;
+			
+						if (opts.isNavLeftPositioned && $("#pageContentWrapper").offset().left - $firstChar.offset().left > 0) {
+							$firstChar.css({ textIndent: $("#pageContentWrapper").offset().left - $firstChar.offset().left + "px" });
+						}
+					}
+				} else {
+					pageNavFirstCharOffsetTop = -20;
+				}
+					
+				var $staffNavOverviewWrapper = $pageNav.find("ul li#staffNavOverviewWrapper");
+				var $staffNavContactWrapper = $pageNav.find("ul li#staffNavContactWrapper");
+				
+				var staffNavOverviewWrapperMarginTop = ($staffNavOverviewWrapper.offset().top - $pageNav.offset().top) + pageNavFirstCharOffsetTop;
+				
+				if ($staffNavOverviewWrapper.css("background-color") !== "rgba(0, 0, 0, 0)" || $staffNavOverviewWrapper.css("background-image") !== "none") {
+					$staffNavOverviewWrapper[0].style.setProperty("background", $staffNavOverviewWrapper.css("background"));
+				}
+
+				if ($staffNavContactWrapper.length > 0 && ($staffNavContactWrapper.css("background-color") !== "rgba(0, 0, 0, 0)" || $staffNavContactWrapper.css("background-image") !== "none")) {
+					$staffNavContactWrapper[0].style.setProperty("background", $staffNavContactWrapper.css("background"));
+				}
+				
+				
+				$staffOverviewWrapperEle[0].style.setProperty("top", -1 * staffNavOverviewWrapperMarginTop + "px", "important");
+				$staffOverviewWrapperEle[0].style.setProperty("margin-bottom", -1 * (staffNavOverviewWrapperMarginTop - photoOffsetBottom - extraMarginBottom + 20) + "px", "important");
+				
+				$staffOverviewWrapperEle.offset({ left: $staffOverviewWrapperEle.offset().left });
+				
+				$staffOverviewWrapperEle.find(".staffOverWrapperOutline:eq(0)").each(function() { var $this = $(this);
+					var thisPadding = 0;
+					if (pageNavFirstCharOffsetTop > 0) {
+						thisPadding = 10;
+					}
+					if (opts.isStaffPhotoOverlayed) {
+						$this.height($staffOverviewWrapperEle.height() - pageNavFirstCharOffsetTop + thisPadding - 1);
+						$this.css({ top: pageNavFirstCharOffsetTop - thisPadding + "px" });
+					} else {
+						$this.height($staffOverviewWrapperEle.height() + thisPadding - 1);
+						$this.css({ top: thisPadding + "px" });
+					}
+				});
+			}
+		}
+	},
+		
+	isLoaded: function() {
+		if (!PagesPublic.initialized) {
+			PagesPublic.init();
+		}
+		return true;
+	}
+
+};

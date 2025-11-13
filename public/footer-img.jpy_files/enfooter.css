@@ -1,0 +1,30 @@
+footer#enfooter3 {
+  /* Footer background */
+  --footer-top-background: #f2f3f4;
+  --footer-main-background: #fff;
+  --subfooter-main-background: #f2f3f4;
+
+  /* Footer height */
+  --topfooter-inner-height: 50px;
+  --footer-inner-height: 180px;
+  --subfooter-inner-height: 46px;
+
+  /* Footer font */
+  --footer-font: 500 clamp(15px, 1.64vw, 18px) 'Montserrat', sans-serif;
+  --footer-font-color: #000000;
+  --footer-line-height: 1.2222222222;
+  --footer-letter-spacing: 0.45px;
+
+  /* Footer logo */
+  --footer-logo-width: clamp(80px, 11vw, 123px);
+  --footer-name-width: clamp(190px, 25vw, 285px);
+  --edunet-logo-width: clamp(168px, 16.73vw, 186px);
+}
+
+@media only screen and (max-width: 768px) {
+  footer#enfooter3 {
+    --topfooter-inner-height: auto;
+    --footer-inner-height: auto;
+    --subfooter-inner-height: auto;
+  }
+}

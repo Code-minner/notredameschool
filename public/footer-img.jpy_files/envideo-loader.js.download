@@ -1,0 +1,86 @@
+class ENVideoLoader {
+
+    targetNode = document.body;
+    observerConfig = {attributes: true, subtree: true};
+    static envideoutils_js_file = "/apps-shared/video_player/envideoutils.js";
+    static envideo_js_file = "/apps-shared/video_player/envideo.js";
+
+    constructor() {
+        this.loadScripts()
+            .then(() => {
+                this.replaceVideosWithENVideo();
+                const observer = new MutationObserver(this.mutationListener);
+                observer.observe(this.targetNode, this.observerConfig);
+            }).catch(e => {
+            console.error(`error while loading envideo scripts ${e}`);
+        })
+
+    }
+
+    loadScripts = async () => {
+        await ENVideoLoader.loadScript(ENVideoLoader.envideoutils_js_file);
+        await ENVideoLoader.loadScript(ENVideoLoader.envideo_js_file);
+    }
+
+    replaceVideosWithENVideo = () => {
+        const videoElements = document.querySelectorAll('video[en-video-player]');
+        videoElements.forEach(video => {
+            const enVideo = document.createElement('en-video');
+            Array.from(video.attributes).forEach(attr => {
+                enVideo.setAttribute(attr.name, attr.value);
+            });
+            while (video.firstChild) {
+                enVideo.appendChild(video.firstChild);
+            }
+            video.replaceWith(enVideo);
+        });
+    }
+
+    mutationListener = (mutationsList) => {
+        mutationsList.forEach(mutation => {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(node => {
+                    if (node.tagName === 'VIDEO' && node.classList.contains('en-video-player')) {
+                        ENVideoLoader.convertVideoToEnVideo(mutation.target);
+                        console.log('new video element added into the dom. the video has been converted to en-video');
+                    }
+                });
+            } else if (mutation.type === 'attributes' && mutation.target.tagName === 'VIDEO') {
+                const video = mutation.target;
+                if (video.classList.contains('en-video-player')) {
+                    ENVideoLoader.convertVideoToEnVideo(video);
+                    console.log(`en-video-player class has been added to video. the video has been converted to en-video`);
+                }
+            }
+        });
+    };
+
+    static convertVideoToEnVideo = (video) => {
+        const enVideo = document.createElement('en-video');
+        video.replaceWith(enVideo);
+        [...video.attributes].forEach(attr => enVideo.setAttribute(attr.name, attr.value));
+        while (video.firstChild) {
+            enVideo.appendChild(video.firstChild);
+        }
+    }
+
+    static  loadScript = url => new Promise((resolve, reject) => {
+        if (!document.querySelector(`script[src="${url}"]`)) {
+            const script = document.createElement('script');
+            script.src = url;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        } else {
+            resolve();
+        }
+    });
+
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    var _enVideoLoader = new ENVideoLoader();
+})
+
+

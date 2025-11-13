@@ -1,0 +1,62 @@
+/* 
+	Depends on DialogBoxes 
+*/ 
+var DocumentViewer = {
+		
+	show : function(documentSource) {
+		// Close the current dialog
+		if(DialogBoxes.IsDialogOpen) {
+			DialogBoxes.hide();
+		}
+		
+		var documentContainer = document.getElementById("Document_container");
+		if(!documentContainer) {
+			documentContainer = document.createElement("div");
+			documentContainer.setAttribute("id", "Document_container");
+			documentContainer.setAttribute("style", "display: none;")
+			document.body.appendChild(documentContainer);
+		}
+		
+		var documentDiv = document.getElementById("Document_div");
+		if(!documentDiv) {
+			documentDiv = document.createElement("div");
+			documentDiv.setAttribute("id", "Document_div");
+			documentContainer.appendChild(documentDiv);
+		}
+		
+		var close = document.createElement("img");
+		close.setAttribute("style", "padding: 0 3px 5px 0; float: right; cursor: pointer;");
+		close.setAttribute("alt", "Close");
+		close.setAttribute("title", "Close")
+		close.src = "/apps/pics/close.gif";
+		close.onclick = DialogBoxes.hide;
+		
+		var w = Math.max(800, window.innerWidth - 400);
+		var h = Math.max(600, window.innerHeight - 100);
+		
+		var documentDocument = document.createElement("iframe");
+		documentDocument.setAttribute("style", "border: 1px solid #000000; background: #FFFFFF; border-radius: 6px; width: " + (w-4) + "px; height: " + (h-100) + "px;");
+		documentDocument.src = "http://docs.google.com/viewer?url=" + documentSource + "&embedded=true";
+		
+		var linkToOriginal = document.createElement("a");
+		linkToOriginal.setAttribute("style", "color: #FFFFFF; display: block; text-align: center; margin-top: 8px; font-size: 14px; padding: 0 3px 5px 0; float: none; cursor: pointer; text-shadow: 0 0 2px #000000;");
+		linkToOriginal.setAttribute("alt", documentSource);
+		linkToOriginal.setAttribute("title", documentSource)
+		linkToOriginal.href = documentSource;
+		linkToOriginal.innerHTML = "Download Original &rarr;";
+		
+		while(documentDiv.hasChildNodes()) {
+			documentDiv.removeChild(documentDiv.lastChild);
+		}
+		documentDiv.appendChild(close);
+		documentDiv.appendChild(documentDocument);
+		documentDiv.appendChild(linkToOriginal);
+		
+		DialogBoxes.show({ srcDiv: "Document_div", w: w, h: h, onClick: DialogBoxes.hide });
+	},
+	
+	isLoaded : function() {
+		return true;
+	}
+
+};

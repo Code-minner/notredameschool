@@ -1,0 +1,102 @@
+window.addEventListener('load', (event) => {
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    var pageTitleElement= document.getElementById("pageTitle");
+    if(document.getElementById("pageNav")!==null){
+        document.getElementsByClassName("pageTitle")[0].classList.add("pageTitleHidden");
+    }
+
+    var pageTitleHTML= pageTitleElement.innerHTML;
+    var pageTitleStyle =getComputedStyle(pageTitleElement);
+    document.getElementById("modal-header-title").style.fontFamily= pageTitleStyle.fontFamily;
+    if(document.getElementById("staffNavOverviewWrapper")!==null) {
+        var staffOverViewHTML = document.getElementById("staffNavOverviewWrapper").innerHTML;
+        document.getElementById("en-cms-staff-page-title-image").innerHTML=staffOverViewHTML;
+    }
+// Get the button that opens the modal
+    var btn = document.getElementById("wrapperPageInner");
+// Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+    if(!isEmpty(btn)) {
+        btn.onclick = function () {
+            modal.style.display = "block";
+            /*pageTitleElement.style.display = "none";*/
+            document.getElementsByClassName("en-modal-header")[0].getElementsByTagName("div")[0].innerHTML = pageTitleHTML;
+            document.body.classList.add("model-open");
+            document.getElementById("wrapperPageInner").classList.add("blur-filter");
+        }
+    }
+
+// When the user clicks on <span> (x), close the modal
+    if(!isEmpty(span)) {
+        span.onclick = function () {
+            modal.style.display = "none";
+            document.getElementById("pageContentWrapper").classList.remove("blur-filter");
+            document.getElementById("wrapperPageInner").classList.remove("blur-filter");
+            pageTitleElement.style.display = "block";
+            document.body.classList.remove("model-open");
+        }
+    }
+    var pageInnerText = document.getElementById("pageInnerText");
+    var ul = document.querySelectorAll("#pageNav ul li b");
+     if(document.querySelector("#pageNav ul li b")!==null){
+         pageInnerText.innerText = document.querySelector("#pageNav ul li b").innerText;
+     }else if((document.querySelector("#pageNav ul li strong")!==null)){
+         pageInnerText.innerText = document.querySelector("#pageNav ul li strong").innerText;
+     }
+// When the user clicks anywhere outside of the modal, close it
+    var pageULA = document.querySelector("#pageNav ul li a");
+    window.onclick = function(event) {
+        if(event.target==pageULA){
+                pageInnerText.innerText = event.target.innerText;
+        }
+        else if (event.target == modal) {
+            modal.style.display = "none";
+            pageTitleElement.style.display="block";
+            document.getElementById("pageContentWrapper").classList.remove("blur-filter");
+            document.getElementById("wrapperPageInner").classList.remove("blur-filter");
+            document.body.classList.remove("model-open");
+        }
+    }
+
+    if(document.getElementById("wrapperPageInner")!==null) {
+        document.getElementById("wrapperPageInner").addEventListener('click', () => {
+            document.getElementById("pageNav").style.display = "block";
+            document.getElementById("pageNav").classList.add("makePopup");
+            document.getElementById("pageContentWrapper").classList.add("blur-filter");
+        });
+    }
+    function getEventTarget(e) {
+        e = e || window.event;
+        return e.target || e.srcElement;
+    }
+    var tds =document.querySelectorAll("#staff.staffR1.staff-v-1 table td");
+    if(!isEmpty(tds)) {
+        for (var r = 0, n = tds.length; r < n; r++) {
+            var text = tds[r].innerText;
+            if (text == "N/A") {
+                tds[r].className = 'staffVerticalremoveNA';
+            }
+        }
+    }
+
+    function isEmpty(val){
+        return val===undefined || val===null || val===''|| (Array.isArray(val) && val.length===0);
+    }
+
+    updateStaffOverviewWrapper();
+    window.addEventListener("resize", updateStaffOverviewWrapper);
+
+});
+
+function updateStaffOverviewWrapper() {
+    if (window.matchMedia("(max-width: 700px)").matches) {
+        const staffOverviewWrapper = document.querySelector(".staffOverviewWrapper");
+        if(staffOverviewWrapper) {
+            staffOverviewWrapper.style.cssText = "margin-top: 0 !important; margin-bottom: 30px !important; top: 0 !important; position: relative; left: 0;";
+        }
+    }
+}
+

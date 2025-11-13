@@ -1,0 +1,251 @@
+function ENCMSCompatibilityManager(editableDiv, imageGallery, docsDiv, compParams) {
+	this.editableDiv = editableDiv;
+	this.compParams = compParams;
+	this.imageGallery = imageGallery;
+	this.docsDiv = docsDiv;
+	this.isMobileSite = (this.compParams.get("isMobileSite") == "true");
+	this.icons = new Map([
+		[null, "file"]
+		,["pdf", "pdf"]
+		,["doc", "doc"]
+		,["docx", "doc"]
+		,["xls", "xls"]
+		,["xlsx", "xls"]
+		,["ppt", "ppt"]
+		,["pptx", "ppt"]
+		,["txt", "txt"]
+		,["wav", "wav"]
+		,["mp3", "mp3"]
+		,["wmv", "wmv"]
+		,["mov", "mov"]
+	]);
+	
+	if (this.imageGallery) {
+		this.imageGallery.classList.add("en_unused_images_gallery");
+	}
+	this.docsDiv.classList.add("en_unused_documents_list");
+	this.docsDiv.setAttribute("role", "region");
+	this.docsDiv.setAttribute("aria-label", "Files");
+	
+	this.removeFile = function(path, lastModified) {
+		if (this.imageGallery == null || path == null || path == "") {
+			return;
+		}
+		let imageDiv = this.getImageDivFromGallery(path, lastModified);
+		if (imageDiv != null) {
+			imageDiv.remove();
+		}
+	}
+	
+	this.getImageDivFromGallery = function(path, lastModified) {
+		
+		for (let x = 0; x < this.imageGallery.childNodes.length; x++) {
+			let thisChild = this.imageGallery.childNodes[x];
+			if (thisChild.tagName == "DIV") {
+				let autodirImagePath = thisChild.getAttribute("en-autodir-image-path");
+				if (autodirImagePath != null) {
+					if (lastModified == null) {
+						if (autodirImagePath.startsWith(path + "?")) {
+							return thisChild;
+						}
+					} else {
+						if (autodirImagePath == path + "?rnd=" + lastModified) {
+							return thisChild;
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	this.fileIsInUse = function(path, parentNode) {
+		if (parentNode == null) {
+			parentNode = this.editableDiv;
+		}
+		for (let x = 0; x < parentNode.children.length; x++) {
+			let c = parentNode.children[x];
+			if (c.tagName == "IMG" || c.tagName == "A") {
+				let targetURL =  c.getAttribute(c.tagName == "IMG" ? "src" : "href");
+				if (targetURL == path) {
+					return true;
+				} else if (targetURL && targetURL.substr(0, targetURL.length - 3) == path.substr(0, path.length - 3)
+					&& (targetURL.substr(-3) == "000" || path.substr(-3) == "000")
+				) {
+					return true;
+				}
+			} else if (c.tagName == "OBJECT") {
+				let targetURL =  c.getAttribute("data");
+				if (targetURL == path) {
+					return true;
+				} else if(path && targetURL) {
+					const cleanPathUrl = path.split('?')[0];
+					const cleanTargetUrl = targetURL.split('?')[0];
+					// Compare the cleaned URLs
+					return cleanPathUrl === cleanTargetUrl;
+				}
+			} else {
+				if (c.children != null) {
+					if (this.fileIsInUse(path, c) == true) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	this.updateDocsList = function(pathList) {
+		if (this.docsDiv == null || pathList == null) {
+			return;
+		}
+		if (this.compParams == null || this.compParams.get("urlDomain") == null) {
+			return;
+		}
+		
+		let list = document.createElement("ul");
+		list.classList.add("fbList");
+
+		for (let x = 0; x < pathList.length; x++) {
+			let thisPath = pathList[x][0];
+			let lastModified = pathList[x][1];
+			let safePath = thisPath + "?rnd=" + lastModified;
+			if (thisPath == null || thisPath == "" || this.fileIsInUse(safePath)) {
+				continue;
+			}
+			let tmp = thisPath.split("/");
+			let filename = tmp[tmp.length - 1];
+			let ext = null;
+			tmp = filename.split(".");
+			if (tmp.length > 0) {
+				ext = tmp[tmp.length - 1];
+			}
+			let item = document.createElement("li");
+			item.style.paddingLeft = "5px";
+			
+			let spanIcon = document.createElement("span");
+			spanIcon.setAttribute("class", "icon icon-" + (this.icons.get(ext) != null ? this.icons.get(ext) : "file"));
+			item.appendChild(spanIcon);
+			
+			let anchor = document.createElement("a");
+			anchor.setAttribute("href", this.compParams.get("urlDomain") + safePath);
+			anchor.setAttribute("target", "_blank");
+			anchor.style.leftMargin = "7px";
+			anchor.innerHTML = this.htmlEncode(decodeURIComponent(filename));
+			item.appendChild(anchor);
+			
+			if (this.compParams.get("showInPopup") == "true") {
+				if (ext == "pdf" || ext == "doc" || ext == "docx" || ext == "xls" || ext == "xlsx" || ext == "ppt" || ext == "pptx") {
+					let img = new Image();
+					img.setAttribute("alt", "Preview " + filename);
+					img.setAttribute("title", "Preview " + filename);
+					img.style.verticalAlign = "middle";
+					img.style.cursor = "pointer";
+					img.style.marginLeft = "4px";
+					img.setAttribute("src", "/apps/pics/zoom.png");
+					let fakeLink = document.createElement("a");
+					fakeLink.href = thisPath;
+					img.setAttribute("onclick", "DocumentViewer.show(`" + fakeLink.href + "`)");
+					item.appendChild(img);
+				}
+			}
+			
+			list.appendChild(item);
+		}
+		
+		if (list.childNodes.length > 0) {
+			let n = document.createElement("div");
+			n.innerHTML = '<b role="heading" aria-level="2">Files:</b>';
+			n.appendChild(list);
+			if (n.innerHTML != docsDiv.innerHTML) {
+				docsDiv.innerHTML = n.innerHTML;
+			}
+			this.docsDiv.style.display = "block";
+		} else {
+			this.docsDiv.style.display = "none";
+		}
+		
+	}
+	
+	this.createImageDiv = function(safePath, altText) {
+		let d = document.createElement("div");
+		d.classList.add("en-unused-image-outer-container")
+		d.setAttribute("en-autodir-image-path", safePath);
+		
+		let d2 = document.createElement("div");
+		d2.classList.add("en-unused-image-inner-container")
+		
+		let i = new Image();
+		i.style.width = this.compParams.get("imageWidth") + "px";
+		i.src = safePath;
+		i.classList.add("en-unused-image", "sub");
+		i.setAttribute("alt", (altText ? altText : this.extractFileName(safePath)));
+		d2.appendChild(i);
+		
+		if (!this.isMobileSite) {
+
+			let a = document.createElement("a");
+			a.style.display = "block";
+			a.style.textAlign = this.compParams.get("textAlign");
+			a.setAttribute("href", "javascript: PhotoViewer.show('" + safePath + "', '', 600);");
+
+			let iMag = new Image();
+			iMag.src = "/apps/pics/enlarge.png";
+			iMag.classList.add("en-unused-image-enlarge-icon");
+			iMag.setAttribute("alt", "Enlarge icon");
+			d2.appendChild(iMag);
+			
+			a.appendChild(d2);
+			d.appendChild(a);
+		} else {
+			d2.style.width = "80%";
+			i.style.width = "100%";
+			d.appendChild(d2);
+		}
+
+		
+		return d;
+	}
+	
+	this.addImage = function(path, lastModified, altText) {
+		if (this.imageGallery == null || path == null || path == "" || lastModified <= 0) {
+			return;
+		}
+		if (this.compParams == null || this.compParams.get("imageWidth") == null) {
+			return;
+		}
+		
+		let safePath = path + "?rnd=" + lastModified;
+		if (this.fileIsInUse(safePath)) {
+			return;
+		}
+
+		let imageDiv = this.getImageDivFromGallery(path);
+		if (imageDiv != null && imageDiv.getAttribute("en-autodir-image-path") == safePath) {
+			return;
+		}
+		
+		let newImageDiv = this.createImageDiv(safePath, altText);
+		
+		if (imageDiv == null) {
+			this.imageGallery.appendChild(newImageDiv);
+		} else {
+			this.imageGallery.replaceChild(newImageDiv, imageDiv);
+		}
+	}
+	
+	this.htmlEncode = function(s) {
+		let el = document.createElement("div");
+		el.innerText = el.textContent = s;
+		return el.innerHTML;
+	}
+
+	this.extractFileName = function(fullPath) {
+		try {
+			let fileNameWithExt = fullPath.split('/').pop();
+			return fileNameWithExt.replace(/\.[^/.]+$/, "");
+		} catch (e) {
+			return "";
+		}
+	}
+}

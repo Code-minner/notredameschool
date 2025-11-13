@@ -1,0 +1,71 @@
+/* 
+	Depends on DialogBoxes 
+*/ 
+var PhotoViewer = {
+	show : function(imageSource, captionText, defaultWidth, maxWidth) {
+		// Close the current dialog
+		if(DialogBoxes.IsDialogOpen) {
+			DialogBoxes.hide();
+		}
+		
+		var imageContainer = document.getElementById("PV_imageContainer");
+		if(!imageContainer) {
+			imageContainer = document.createElement("div");
+			imageContainer.setAttribute("id", "PV_imageContainer");
+			imageContainer.setAttribute("style", "display: none;")
+			document.body.appendChild(imageContainer);
+		}
+		
+		var imageDiv = document.getElementById("PV_imageDiv");
+		if(!imageDiv) {
+			imageDiv = document.createElement("div");
+			imageDiv.setAttribute("id", "PV_imageDiv");
+			imageContainer.appendChild(imageDiv);
+		}
+		
+		var cachedImage = document.createElement("img");
+		cachedImage.onload = function(e) {
+			var naturalWidth = cachedImage.naturalWidth || cachedImage.offsetWidth || cachedImage.width;
+			var naturalHeight = cachedImage.naturalHeight || cachedImage.offsetHeight || cachedImage.height;
+			var width = parseInt(defaultWidth || naturalWidth);
+			if(typeof maxWidth!="undefined" && parseInt(maxWidth)>0 && parseInt(maxWidth)<width) {
+				width = parseInt(maxWidth);
+			}
+			var height = Math.ceil(naturalHeight/naturalWidth*width);
+			//cachedImage.setAttribute("style", "width: " + width + "px; border: 5px solid white;");
+			cachedImage.setAttribute("style", "width: " + width + "px; padding: 5px; background: white; border: 1px solid black;");
+			cachedImage.setAttribute("alt", captionText!="" ? captionText : "");
+						
+			var close = document.createElement("img");
+			close.setAttribute("style", "padding: 0 3px 5px 0; float: right; cursor: pointer;");
+			close.setAttribute("alt", "Close");
+			close.setAttribute("title", "Close")
+			close.src = "/apps/pics/close.gif";
+			close.onclick = DialogBoxes.hide;
+			
+			while(imageDiv.hasChildNodes()) {
+				imageDiv.removeChild(imageDiv.lastChild);
+			}
+			imageDiv.appendChild(close);
+			imageDiv.appendChild(cachedImage);
+
+			if(captionText!="") {
+				var caption = document.createElement("p");
+				caption.innerHTML = captionText;
+				caption.setAttribute("style", "display: inline-block; margin: 6px 8px; padding: 8px 12px; border-radius: 4px; background: rgba(0,0,0,0.3); font-size: 1em; line-height: 1.3em; z-index: 9999; color: #FAFAFA; text-align: left;");
+				imageDiv.appendChild(caption);
+			}
+			DialogBoxes.show({ srcDiv: "PV_imageDiv", w: width+12, h: height+(captionText!="" ? 120 : 30), onClick: DialogBoxes.hide });
+		};
+		
+		cachedImage.onerror = function(e) {
+			alert("Sorry, the image could not be loaded.");
+			if(DialogBoxes.IsDialogOpen) {
+				DialogBoxes.hide();
+			}
+		};
+
+		cachedImage.src = imageSource.replace(/#/g, '%23');
+	}	
+};
+

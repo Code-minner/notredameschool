@@ -1,0 +1,51 @@
+header#enheader2 {
+  --text-color: #000000;
+  --font1: 'Montserrat', sans-serif;
+
+  /* Header height */
+  --height: 159px;
+  --top-bar-height: 38px;
+  --bottom-bar-height: 121px;
+
+  /* Header background */
+  --top-bar-background: #f5f7f8;
+  --bottom-bar-background: #fff;
+
+  /* Marquee */
+  --marquee-font: 300 clamp(14px, 1.3636vw, 15px) var(--font1);
+  --marquee-letter-spacing: 0.1px;
+  --marquee-background: var(--top-bar-background);
+  --marquee-color: #000000;
+  --marquee-popup-font: inherit;
+  --marquee-popup-letter-spacing: 0px;
+  --marquee-popup-background: #002a5d;
+  --marquee-popup-color: #fff;
+  --marquee-popup-button-color: #ffffff;
+  --marquee-popup-button-background: #545454;
+  --marquee-popup-active-button-color: #000;
+  --marquee-popup-active-button-background: #fff;
+
+  /* Search translate styles */
+  --column-gap: min(2.8181vw, 31px);
+  --search-translate-font: 400 clamp(12px, 1.26vw, 13px) var(--font1);
+  --search-translate-color: var(--text-color);
+  --search-translate-letter-spacing: 0.25px;
+
+  /* Header logo */
+  --header-logo-width: min(14vw, 156px);
+  --header-name-width: min(23.3636vw, 259px);
+}
+@media only screen and (max-width: 768px) {
+  header#enheader2.enh1 {
+    --header-background: var(--bottom-bar-background);
+
+    --mobnav-button-color: #fff;
+    --mobnav-button-background: #ee2e24;
+    --mobnav-button-hover-color: #ffffff;
+    --mobnav-button-hover-background: #1d1e1c;
+
+    --menu-color: #ffffff;
+    --menu-background: #002a5c;
+    --menu-hover-background: #f0f0f0;
+  }
+}

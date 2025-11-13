@@ -1,0 +1,8 @@
+.en-responsive-table {
+    --en-rt-row-border: 1px solid #666;
+    --en-rt-cell-border:1px solid #DFDFDF;
+    --en-rt-cell-padding: 10px;
+    --en-rt-mobile-header-bg:  #f8f8f8;
+}
+
+

@@ -1,0 +1,246 @@
+@font-face {
+  font-family: 'georgia_italic';
+  src: url('/shared/fonts/georgia_italic.eot') format('embedded-opentype'),
+    /* IE6-IE8 */ url('/shared/fonts/georgia_italic.woff') format('woff'),
+    /* Pretty Modern Browsers */ url('/shared/fonts/georgia_italic.otf') format('opentype'),
+    url('/shared/fonts/georgia_italic.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'Georgia_Regular';
+  src: url('/shared/fonts/Georgia_Regular.eot') format('embedded-opentype'),
+    /* IE6-IE8 */ url('/shared/fonts/Georgia_Regular.woff') format('woff'),
+    /* Pretty Modern Browsers */ url('/shared/fonts/Georgia_Regular.otf') format('opentype'),
+    url('/shared/fonts/Georgia_Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'georgia_bold';
+  src: url('/shared/fonts/georgia_bold.eot') format('embedded-opentype'),
+    /* IE6-IE8 */ url('/shared/fonts/georgia_bold.woff') format('woff'),
+    /* Pretty Modern Browsers */ url('/shared/fonts/georgia_bold.otf') format('opentype'),
+    url('/shared/fonts/georgia_bold.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+:root {
+  --en-website-width: 1100px;
+
+  /* Colors */
+  --primary-color: #002f68;
+  --secondary-color: #002550;
+  --ternary-color: #010101;
+  --text-color: #000000;
+
+  /* Module Titles */
+  --en-website-module-title-font-family: 'Georgia_Regular';
+  --en-website-font-1: clamp(22px, 3.2vw, 36px);
+  --module-title-color: var(--primary-color);
+
+  /*  Content Titles*/
+  --en-website-content-title-font-family: 'Montserrat', sans-serif;
+  --en-website-font-2: clamp(15px, 2vw, 21px);
+  --content-title-color: var(--secondary-color);
+
+  /* Summaries */
+  --en-website-content-summary-font-family: 'Montserrat', sans-serif;
+  --en-website-font-3: clamp(14px, 1.64vw, 18px);
+  --content-summary-color: var(--ternary-color);
+
+  /* Button Fonts */
+  --en-website-button-font-family: 'Montserrat', sans-serif;
+  --en-website-font-4: clamp(14px, 1.55vw, 17px);
+  --btn-text-color: var(--text-color);
+
+  /* Inner */
+  --en-website-inner-font-family: 'Montserrat', sans-serif;
+  --en-website-inner-font: clamp(15px, 1.64vw, 18px);
+  --en-website-inner-font-weight: 300;
+  --en-website-inner-line-height: 30px;
+  --color-neutral: #010101;
+  --color-dark: #fff;
+  --background-color-dark: #002a5c;
+  --color-light: #010101;
+  --background-color-light: #fdfafa;
+}
+html {
+  height: 100%;
+  font-size: 62.5%;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  line-height: 1.231;
+  background: #fff;
+}
+[hidden] {
+  display: none;
+}
+.ir {
+  display: block;
+  text-indent: -999em;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+}
+#pageContentWrapper h1,
+#pageContentWrapper h2,
+#pageContentWrapper h3,
+#pageContentWrapper h4,
+#pageContentWrapper h5,
+#pageContentWrapper h6 {
+  font-family: 'Georgia_Regular';
+  line-height: 32px !important;
+  line-height: 3.2rem !important;
+  margin-bottom: 10px;
+}
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+b,
+strong {
+  font-weight: bold;
+}
+blockquote {
+  margin: 1em 40px;
+}
+dfn {
+  font-style: italic;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+ins {
+  background: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+pre,
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  _font-family: 'courier new', monospace;
+  font-size: 1em;
+}
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+q {
+  quotes: none;
+}
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+small {
+  font-size: 85%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+#mobileapp-smart-banner .en-smartAppBanner-content {
+  width: 100% !important;
+}
+#mobileapp-smart-banner {
+  z-index: 999999999999 !important;
+}
+.en-hp-alert-box {
+  max-width: 600px !important;
+  width: 95% !important;
+}
+.en-hp-alert-box .alert-box-header h1 {
+  font-size: clamp(14px, 1.6363vw, 18px) !important;
+  line-height: 2 !important;
+}
+#alert-box-overlay {
+  z-index: 9999999999 !important;
+}
+.alert-box {
+  z-index: 999999999999 !important;
+}
+@media only screen and (max-width: 650px) {
+  #alert-box {
+    width: 92% !important;
+  }
+  .alert-box .alert-box-body img {
+    width: 100%;
+  }
+}
+div.en-dev-ghost {
+  justify-content: center !important;
+}
+
+#index-page #form-wrap {
+  padding: 25px !important;
+}
+
+.en-hp-alert-box .alert-box-body div.contents,
+.en-hp-alert-box .alert-box-body div.contents table {
+  font-size: 17px !important;
+  font-size: 1.7rem !important;
+  color: #262626 !important;
+  line-height: 24px !important;
+  line-height: 2.4rem !important;
+}
+.en-hp-alert-box .alert-box-body div.contents img {
+  width: 100% !important;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  display: block;
+}
+
+.en-forms-wizard .en-forms-actions .en-forms-disabled a,
+.en-forms-wizard .en-forms-actions .en-forms-disabled a:hover,
+.en-forms-wizard .en-forms-actions .en-forms-disabled a:active,
+.en-forms-wizard .en-forms-actions a,
+.en-forms-wizard .en-forms-actions a:active {
+  font-size: 15px !important;
+}
+#index-page #edunet_webform li.form-item div.alert {
+  color: #010101 !important;
+}

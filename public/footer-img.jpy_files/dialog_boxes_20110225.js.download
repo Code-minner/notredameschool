@@ -1,0 +1,158 @@
+/*
+ *  Dialog Boxes v1.0
+ *  Bhaktavatsalam Nallanthighal
+ *  August 30, 2010
+ *  
+ *  Note: Cross browser information for page width, height, top & left positions obtained
+ *  from http://www.howtocreate.co.uk/tutorials/javascript/browserwindow
+ *   
+ *  Parameters:
+ *      1. w: width of the dialog box
+ *      2. h: height of the dialog box
+ *      3. timeout: Number of milliseconds to wait before automatically hiding
+ *      4. fadeSpeed: The speed at which the fade effect occurs
+ *      5. onOpen: The function to call with no parameters when the dialog opens
+ *      6. onClose: The function to call with no parameters when the dialog is closed
+ *      7. srcDiv: The div to pull content from. Overrides "content"
+ *      8. mode: fullscreen | dialog
+ *
+ *      To close the dialog, call DialogBoxes.hide() function
+ *      For custom styling, override the CSS properties for .DB_mask and .DB_dialog
+ */
+var DialogBoxes = {
+	show : function(params) {
+		if(!params) {
+			params = {};
+		}
+		
+		if(!document.getElementById("DB_mask") && !document.getElementById("DB_dialog")) {
+			DialogBoxes.IsDialogOpen = false;
+			DialogBoxes._onOpen = params.onOpen;
+			DialogBoxes._onClose = params.onClose;
+			DialogBoxes._onBeforeClose = params.onBeforeClose;
+			DialogBoxes._fadeSpeed = params.fadeSpeed ? parseInt(params.fadeSpeed, 10) : 15;
+			DialogBoxes._w = params.w ? parseInt(params.w, 10) : 320;
+			DialogBoxes._h = params.h ? parseInt(params.h, 10) : 240;
+			if(params.timeout) {
+				DialogBoxes._timeout = parseInt(params.timeout, 10);
+			}
+			
+			var DB_mask = document.createElement("div");
+			DB_mask.id = "DB_mask";
+			DB_mask.className += " DB_mask";
+						
+			var DB_dialog = document.createElement("div");
+			DB_dialog.id = "DB_dialog";
+			DB_dialog.className += " DB_dialog";
+			
+			DB_mask.onclick = DialogBoxes.hide;
+			
+			var onKeyUp = function(e) {
+				var keyPressed=null;
+				if(e) { 
+					keyPressed = e.keyCode ? e.keyCode : e.which;
+				} else if(window.event) {
+					keyPressed = window.event.keyCode;
+				}
+					
+				if(keyPressed==27 && document.getElementById("DB_dialog")) {
+					if(document.removeEventListener) {
+						document.removeEventListener('keyup', onKeyUp, false);
+					}
+					else if(document.detachEvent) {
+						document.detachEvent('onkeyup', onKeyUp);
+					}
+							 
+					if(!DialogBoxes.hide()) {
+						if(document.addEventListener) {
+							document.addEventListener('keyup', onKeyUp, false);
+						}
+						else if(document.attachEvent) {
+							document.attachEvent('onkeyup', onKeyUp);
+						}			
+					}
+				}
+				return true;
+			};
+			
+			if(document.addEventListener) {
+				document.addEventListener('keyup', onKeyUp, false);
+			}
+			else if(document.attachEvent) {
+				document.attachEvent('onkeyup', onKeyUp);
+			}
+	
+			/* Window top + (window height - dialog height)/2 */
+			/* Window left + (window width - dialog width)/2 */
+			if(params.mode!="fullscreen") {
+				DB_dialog.style.cssText += "; height: " + DialogBoxes._h + "px; width: " + DialogBoxes._w + "px;";
+			}
+			DB_dialog.alpha = 0;
+				
+			if(params.srcDiv) {
+				DialogBoxes._srcDiv = document.getElementById(params.srcDiv) ? document.getElementById(params.srcDiv).cloneNode(true) : null;
+				DialogBoxes._srcContainer = document.getElementById(params.srcDiv).parentNode; 
+				DB_dialog.appendChild(document.getElementById(params.srcDiv));
+			}
+			document.body.appendChild(DB_mask);
+			document.body.appendChild(DB_dialog);
+			
+			DialogBoxes._dialogTimer = setInterval(function() { DialogBoxes.fade(true); }, DialogBoxes._fadeSpeed);
+			if(DialogBoxes._timeout) {
+				window.setTimeout(function() { DialogBoxes.hide(); }, DialogBoxes._timeout);
+			}
+		}
+	},
+	
+	hide : function() {
+		if(DialogBoxes.IsDialogOpen) {
+			if(DialogBoxes._onBeforeClose) {
+				if(!DialogBoxes._onBeforeClose()) {
+					return false;
+				};
+			}
+			clearInterval(DialogBoxes._dialogTimer);
+			var DB_dialog = document.getElementById("DB_dialog");
+			while(DB_dialog.hasChildNodes()) {
+				DB_dialog.removeChild(DB_dialog.lastChild);
+			}
+			DialogBoxes._dialogTimer = setInterval(function() { DialogBoxes.fade(false); }, DialogBoxes._fadeSpeed);
+		}
+		return true;
+	},
+	
+	fade : function(show) {
+		var DB_dialog = document.getElementById("DB_dialog");
+		var dialog_mask_transparency = DB_dialog.alpha + ((show ? 1 : -1) * DialogBoxes._fadeSpeed); 
+		DB_dialog.alpha = dialog_mask_transparency;
+		DB_dialog.style.opacity = (dialog_mask_transparency / 100);
+		DB_dialog.style.filter = "alpha(opacity=" + dialog_mask_transparency + ")";
+		
+		if(dialog_mask_transparency >= 99) {
+			clearInterval(DialogBoxes._dialogTimer);
+			DialogBoxes._dialogTimer = null;
+			
+			DialogBoxes.IsDialogOpen = true;
+			if(DialogBoxes._onOpen) {
+				DialogBoxes._onOpen();
+			}
+		} else if(dialog_mask_transparency <= 1) {
+			if(DialogBoxes._srcDiv && DialogBoxes._srcContainer) {
+				DialogBoxes._srcContainer.appendChild(DialogBoxes._srcDiv);
+				DialogBoxes._srcContainer = null;
+				DialogBoxes._srcDiv = null;
+			}
+			document.body.removeChild(document.getElementById("DB_mask"));
+			document.body.removeChild(document.getElementById("DB_dialog"));
+			clearInterval(DialogBoxes._dialogTimer);
+			DialogBoxes.IsDialogOpen = false;
+			if(DialogBoxes._onClose) {
+				DialogBoxes._onClose();
+			}
+		}
+	},
+	
+	isLoaded : function() {
+		return true;
+	}
+};

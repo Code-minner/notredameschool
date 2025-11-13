@@ -1,0 +1,330 @@
+const TABLET_BREAK_POINT = 750;
+const MOBILE_BREAK_POINT = 450;
+
+
+const RESPONSIVE_TABLE_BREAKPOINT = 'en-responsive-table-breakpoint';
+const RESPONSIVE_TABLE_MOBILE_BREAKPOINT = 'en-responsive-table-mobile-breakpoint';
+document.addEventListener("DOMContentLoaded", () => {
+    const tableList = document.querySelectorAll(`[${RESPONSIVE_TABLE_BREAKPOINT}]`);
+    const responsiveTableBuilder = new ResponsiveTableBuilder();
+    tableList.forEach(table => {
+        const tabletBreakPoint = table.getAttribute(`${RESPONSIVE_TABLE_BREAKPOINT}`);
+        responsiveTableBuilder.fromTable({table, tabletBreakPoint: tabletBreakPoint})
+    });
+
+})
+
+
+class ResponsiveTableBuilder {
+
+    fromSelector() {
+
+        if (!arguments || arguments.length === 0) {
+            return;
+        }
+
+        Array.from(arguments).forEach(arg => {
+
+            if (!arg.selectorList || arg.selectorList.length === 0) {
+                return;
+            }
+            let tabletBreakPoint = null;
+            let mobileBreakPoint = null;
+
+            // this logic is related backward compatibility
+            // Previous version contains only 1 mod which is tablet-view and called mobileBreakPoint
+            // This version contains 2 version which are tablet view(tabletBreakPoint) and mobile view(mobileBreakPoint).
+            // If there is no tablet view value, we accept mobile breakpoint as tablet View and assign the value as tabletBreakPoint
+            if (arg.tabletBreakPoint && arg.mobileBreakPoint ) {
+                tabletBreakPoint = arg.tabletBreakPoint;
+                mobileBreakPoint = arg.mobileBreakPoint;
+            } else if (!arg.tabletBreakPoint && arg.mobileBreakPoint) {
+                tabletBreakPoint = arg.mobileBreakPoint;
+            }
+            arg.selectorList.forEach((selector) => {
+                const tableList = document.querySelectorAll(selector);
+                tableList.forEach(table => {
+                    this.fromTable({table, tabletBreakPoint, mobileBreakPoint});
+                })
+            })
+
+        })
+        console.log(arguments);
+    }
+
+
+    fromTable({table, tabletBreakPoint, mobileBreakPoint}) {
+        tabletBreakPoint = this.validateTabletViewBreakPoint(tabletBreakPoint)
+        mobileBreakPoint = mobileBreakPoint = this.validateMobileViewBreakPoint(mobileBreakPoint);
+        new ResponsiveTable({table, tabletBreakPoint, mobileBreakPoint})
+        this.loadCSS(tabletBreakPoint, mobileBreakPoint);
+    }
+
+    validateTabletViewBreakPoint(tabletBreakPoint) {
+        if (!tabletBreakPoint) {
+            return TABLET_BREAK_POINT;
+        }
+        if (!!isNaN(tabletBreakPoint)) {
+            console.warn(`Invalid break point value: ${tabletBreakPoint}. Default value is used ${TABLET_BREAK_POINT}`)
+            return TABLET_BREAK_POINT;
+        }
+        if (tabletBreakPoint < 300 || tabletBreakPoint > 1100) {
+            console.warn(`Invalid break point value ${tabletBreakPoint}. The range is between 300 and 1100. Default value is used ${TABLET_BREAK_POINT}`)
+            return TABLET_BREAK_POINT;
+        }
+
+        return tabletBreakPoint;
+    }
+
+    validateMobileViewBreakPoint(mobileBreakPoint) {
+        if (!mobileBreakPoint) {
+            return MOBILE_BREAK_POINT;
+        }
+        if (!!isNaN(mobileBreakPoint)) {
+            console.warn(`Invalid break point value: ${mobileBreakPoint}. Default value is used ${MOBILE_BREAK_POINT}`)
+            return MOBILE_BREAK_POINT;
+        }
+        if (mobileBreakPoint < 300 || mobileBreakPoint > 1100) {
+            console.warn(`Invalid break point value ${mobileBreakPoint}. The range is between 300 and 1100. Default value is used ${MOBILE_BREAK_POINT}`)
+            return MOBILE_BREAK_POINT;
+        }
+
+        return mobileBreakPoint;
+    }
+
+    loadCSS(tabletBreakPoint, mobileBreakPoint) {
+
+        this.loadTabletViewCSS(tabletBreakPoint);
+        this.loadMobileViewCSS(mobileBreakPoint);
+    }
+
+    loadTabletViewCSS(tabletBreakPoint) {
+        const cssId = `responsive-table-${tabletBreakPoint}`;
+        if (document.getElementById(cssId)) return;
+
+        const style = document.createElement("style");
+        style.setAttribute(`media`, `all and (max-width: ${tabletBreakPoint}px)`)
+        style.id = cssId;
+        const styleNode = document.createTextNode(this.createCssTabletView(tabletBreakPoint))
+        style.appendChild(styleNode);
+
+        document.getElementsByTagName("head")[0].append(style);
+    }
+
+    loadMobileViewCSS(mobileBreakPoint) {
+        const cssId = `responsive-table-mobile-${mobileBreakPoint}`;
+        if (document.getElementById(cssId)) return;
+
+        const style = document.createElement("style");
+        style.setAttribute(`media`, `all and (max-width: ${mobileBreakPoint}px)`)
+        style.id = cssId;
+        const styleNode = document.createTextNode(this.createCssMobileView(mobileBreakPoint))
+        style.appendChild(styleNode);
+
+        document.getElementsByTagName("head")[0].append(style);
+    }
+
+    createCssTabletView(tabletBreakPoint) {
+        return `
+        [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table,
+        [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table * {
+         box-sizing: border-box;
+        }
+            [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table,
+            [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table table {
+                border-collapse: collapse;
+            }
+            
+            [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table > thead {
+                display: none;
+            }
+           
+           [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table .en-responsive-table-tr:first-child {
+               border-top: 1px solid #333;
+           } 
+           [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table .en-responsive-table-tr {
+                display: flex;
+                flex-direction: column;
+                border-bottom: var(--en-rt-row-border);
+                border-left: var(--en-rt-row-border);
+                border-right: var(--en-rt-row-border);
+                height: auto !important;
+            }
+            
+           [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table .en-responsive-table-td {
+                display: flex;
+                align-items: stretch;
+                padding: 0;
+                border-bottom: var(--en-rt-cell-border);
+            }
+            
+            [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table .en-responsive-table-td:last-child {
+                border-bottom: none;
+            }
+            
+            
+            [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table {
+                width: 100%;
+            }
+            
+           [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table .en-responsive-table-header {
+                width: 30%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                text-align: left;
+                padding: var(--en-rt-cell-padding);
+            }
+            
+           [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table .en-responsive-table-content {
+                flex: 1;
+                border: none;
+                padding: var(--en-rt-cell-padding);
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                box-sizing: border-box;
+            }
+            
+            [${RESPONSIVE_TABLE_BREAKPOINT}="${tabletBreakPoint}"].en-responsive-table colgroup {
+                display: none;
+            }
+        `
+    }
+
+    createCssMobileView(mobileBreakPoint) {
+        return `
+            [${RESPONSIVE_TABLE_MOBILE_BREAKPOINT}="${mobileBreakPoint}"].en-responsive-table,
+            [${RESPONSIVE_TABLE_MOBILE_BREAKPOINT}="${mobileBreakPoint}"].en-responsive-table table {
+                
+            }
+            
+           #pageWrapperTable [${RESPONSIVE_TABLE_MOBILE_BREAKPOINT}="${mobileBreakPoint}"].en-responsive-table .en-responsive-table-td,
+            [${RESPONSIVE_TABLE_MOBILE_BREAKPOINT}="${mobileBreakPoint}"].en-responsive-table .en-responsive-table-td {
+             flex-direction: column;
+             box-sizing: border-box;
+            }
+          
+          [${RESPONSIVE_TABLE_MOBILE_BREAKPOINT}="${mobileBreakPoint}"].en-responsive-table .en-responsive-table-header {
+            width: 100%;
+            padding-bottom: calc(var(--en-rt-cell-padding) / 2);
+            background: var(--en-rt-mobile-header-bg);  
+          }  
+
+           [${RESPONSIVE_TABLE_MOBILE_BREAKPOINT}="${mobileBreakPoint}"].en-responsive-table .en-responsive-table-content {
+                padding-top: calc(var(--en-rt-cell-padding) / 2);
+            }
+          
+            `;
+    }
+
+}
+
+class ResponsiveTable {
+
+    headers = [];
+
+    table;
+    tabletBreakPoint = TABLET_BREAK_POINT;
+    mobileBreakPoint = MOBILE_BREAK_POINT;
+
+
+    constructor({table, tabletBreakPoint, mobileBreakPoint}) {
+        if (!table) return;
+        if ('TABLE' !== table.nodeName.toUpperCase()) {
+            return;
+        }
+
+        this.table = table;
+        if (tabletBreakPoint) this.tabletBreakPoint = tabletBreakPoint;
+        if (mobileBreakPoint) this.mobileBreakPoint = mobileBreakPoint;
+
+
+        table.setAttribute(`${RESPONSIVE_TABLE_BREAKPOINT}`, tabletBreakPoint);
+        table.setAttribute(`${RESPONSIVE_TABLE_MOBILE_BREAKPOINT}`, mobileBreakPoint);
+
+        this.collectHeaders();
+
+        this.table.classList.add('en-responsive-table')
+        const mql = window.matchMedia(`(min-width: ${this.tabletBreakPoint}px)`);
+
+        mql.addEventListener('change', (e) => {
+            this.viewPortWidthListener(e);
+        });
+
+        const isTablet = window.innerWidth < this.tabletBreakPoint;
+        this.viewPortWidthListener({matches: !isTablet})
+
+    }
+
+    viewPortWidthListener(e) {
+        if (e.matches) {
+            this.createDesktopTable();
+        } else {
+            this.createMobileTable();
+        }
+    }
+
+
+    collectHeaders() {
+        this.headers = this.table.querySelectorAll('table thead tr th');
+    }
+
+    createMobileTable() {
+        let trList = this.table.querySelectorAll('table > tbody > tr');
+        trList.forEach(tr => {
+            let tdList = tr.querySelectorAll('tr > :is(td, th)');
+            tdList.forEach((td, key) => {
+                tr.append(this.createMobileCell(td, key));
+                tr.classList.add('en-responsive-table-tr')
+            });
+        });
+    }
+
+    createMobileCell(contentNode, index) {
+
+        const td = document.createElement('td');
+        td.classList.add('en-responsive-table-td');
+        td.setAttribute('style', 'display:flex !important');
+
+        const header = document.createElement('th');
+        header.classList.add('en-responsive-table-header');
+        //header.classList.add("dark")
+        if (this.headers[index]) {
+            header.innerHTML = this.headers[index].innerHTML;
+        } else {
+            header.classList.add(`en-responsive-table-empty-header`)
+            header.innerHTML = '';
+            if (this.table.hasAttribute('hide-empty-header')) {
+                header.style.display = 'none';
+            }
+        }
+        td.append(header);
+
+        contentNode.classList.add('en-responsive-table-content');
+        td.append(contentNode);
+
+        return td;
+    }
+
+    createDesktopTable() {
+        const trList = this.table.querySelectorAll(`.en-responsive-table-tr`);
+        trList.forEach(tr => {
+
+            const mobileCellList = tr.querySelectorAll('.en-responsive-table-td');
+            mobileCellList.forEach(cell => {
+                const td = cell.querySelector('.en-responsive-table-content');
+                td.classList.remove('en-responsive-table-content');
+                tr.append(td);
+            });
+
+            mobileCellList.forEach(cell => cell.remove());
+            tr.classList.remove(`en-responsive-table-tr`)
+        })
+    }
+}
+
+
+
+
+

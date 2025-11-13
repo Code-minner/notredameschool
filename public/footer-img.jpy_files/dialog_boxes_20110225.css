@@ -1,0 +1,40 @@
+body {
+    *height: 100%;
+}
+
+.DB_mask {
+	display: block;
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 100;
+	zoom: 1;
+	
+	_position: absolute;
+	_top: expression((e=document.documentElement.scrollTop)?e:document.body.scrollTop + 'px');
+	_left: expression((e=document.documentElement.scrollLeft)?e:document.body.scrollLeft + 'px');
+}
+
+/*
+	This is not full screen so that variable sizes for dialog boxes are in the control of the application using it.
+*/
+.DB_dialog {
+    position: fixed;
+    z-index: 101;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: visible;
+    overflow: hidden;
+    max-width: 95vw;
+    max-height: 95vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.DB_dialog img {
+    max-width: 100%;
+    box-sizing: border-box;
+}

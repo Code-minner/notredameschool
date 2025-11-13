@@ -1,0 +1,43 @@
+function resizeCardSlider() {
+  if (window.innerWidth > 1150) {
+    return;
+  } else if (window.innerWidth <= 1150) {
+    let slider = document.querySelector('.en-card-slider-inner-container');
+    if (!slider) return;
+    let columnGap = slider.style.getPropertyValue('column-gap').replace('px', '');
+    slider.style.removeProperty('column-gap');
+    slider.style.setProperty('column-gap', Number(columnGap) + 1 + 'px', 'important');
+  }
+}
+let _debounce = function (ms, fn) {
+  let timer;
+  return function () {
+    clearTimeout(timer);
+    let args = Array.prototype.slice.call(arguments);
+    args.unshift(this);
+    timer = setTimeout(fn.bind.apply(fn, args), ms);
+  };
+};
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new ResizeObserver(_debounce(500, () => resizeCardSlider()));
+  let slider = document.querySelector('body');
+  observer.observe(slider);
+  const newsCard = document.querySelectorAll('.hp-news .news-content div.en-news-slider div.en-card-slider-inner-container > a');
+  const newsTitle = document.querySelectorAll('.hp-news .en-news-slider-title');
+  const newsSummary = document.querySelectorAll('.hp-news .en-news-slider-summary');
+  if (newsCard.length) {
+    newsCard.forEach((element, index) => {
+      const newsContainer = document.createElement('div');
+      newsContainer.classList.add('news-feed');
+      newsContainer.appendChild(newsTitle[index]);
+      newsContainer.appendChild(newsSummary[index]);
+      element.appendChild(newsContainer);
+    });
+  }
+});
+
+class ENResponsiveDiv {
+  constructor() {
+    throw new Error('ENResponsiveDiv class has been disabled.');
+  }
+}

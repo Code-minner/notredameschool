@@ -1,0 +1,591 @@
+@import "index_responsive_W_ASIDE.css";
+
+#STAFF_SINGLE_PAGE_WO_ASIDE #contactStaff {
+    display: flex;
+    justify-content: center;
+}
+
+#contactStaff table tr .emailForm_receiver_info {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+#contactStaff .emailForm_receiver_info .contact-staff-instruction { width: 100%;}
+
+#contactStaff table tr .emailForm_receiver_info.no-contact-form {
+    text-align: center;
+    max-width: 700px;
+    margin-inline: auto;
+}
+
+#pageContentWrapper .contactStaffMember #contactStaff button {
+    background-color: #F8F8F8;
+    color: #000;
+    border: 1px solid #A0A0A0;
+    border-radius: 3px;
+    padding: 9px 13px;
+    box-shadow: 0px 0px 0.2px #888888;
+    cursor: pointer;
+    width: 200px;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+@media (min-width: 701px) {
+    #pageInnerText {
+        display: none;
+    }
+
+    #pageAsideWrapper #pageNav,
+    .en-modal {
+        display: block !important;
+    }
+
+    #en-cms-staff-page-title-image,
+    .en-modal-header {
+        display: none;
+    }
+
+    .staffOverviewWrapper {
+        left: 0px !important;
+    }
+
+    #contactStaff #emailForm input#emailForm_name,
+    #contactStaff #emailForm input#emailForm_email,
+    #contactStaff #emailForm input#emailForm_subject,
+    #contactStaff #emailForm input#emailForm_message {
+        min-width: 350px;
+    }
+
+}
+
+@media (max-width: 700px) {
+    .pageTitleHidden {
+        display: none !important;
+    }
+
+    #pageContentWrapper {
+        padding-top: 2%;
+    }
+
+    #pageAsideWrapper #pageNav {
+        display: none;
+        margin: 2px !important;
+        width: 100% !important;
+    }
+
+    #en-cms-staff-page-title-image {
+        display: block;
+    }
+
+    .en-modal #pageNav ul #staffNavOverviewWrapper {
+        display: none !important;
+    }
+
+    .en-modal #pageNav {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .en-modal #pageNav {
+        zoom: 1.2;
+    }
+
+    #STAFF_MULTI_PAGE_W_ASIDE.staffPageContactInfo #pageAsideWrapper #staffNavContactWrapper .staffContactWrapper,
+    #STAFF_MULTI_PAGE_W_ASIDE.staffPageContactInfo #pageAsideWrapper #staffNavContactWrapper,
+    #staff.staffR1 #staff-search span,
+    #STAFF_MULTI_PAGE_W_ASIDE.staffPageSquarePhoto #pageAsideWrapper .staffOverviewWrapper .staffOverview .staffOverWrapperOutline {
+        display: none !important;
+    }
+
+    #pageWrapperTable tr td,
+    #staff .staff-categoryStaffMembers {
+        display: flex;
+        flex-direction: row;
+        width: 100% !important;
+    }
+
+    /*Override css editable td*/
+    table.en-editable-table td {
+        display: table-cell !important;
+    }
+
+    #STAFF_SINGLE_PAGE_WO_ASIDE.staffPageRoundPhoto .staffOverviewWrapper,
+    #pageContentWrapper ul#staffContentContactWrapper,
+    #STAFF_SINGLE_PAGE_WO_ASIDE #contactStaff {
+        display: flex;
+        justify-content: center;
+    }
+
+    #STAFF_SINGLE_PAGE_WO_ASIDE.staffPageRoundPhoto .staffOverviewWrapper {
+        left: 0px !important;
+    }
+
+    #staff.staffR1 #staff-search {
+        display: initial !important;
+    }
+
+    #staff.staffR1 #staff-search input,
+    #pageContentWrapper {
+        width: 100% !important;
+    }
+
+    #staff.staffR1 #staff-search input {
+        font-size: 1.5em !important;
+    }
+
+    #pageAsideWrapper.pageAsideLeftWrapper,
+    #pageAsideWrapper #pageNav,
+    #STAFF_MULTI_PAGE_W_ASIDE #pageContentWrapper .contactStaffMember #contactStaff table colgroup col,
+    #NON_STAFF_MULTI_PAGE_W_ASIDE #pageWrapperTable,
+    #pageContentWrapper table {
+        width: 100%;
+    }
+
+    #STAFF_MULTI_PAGE_W_ASIDE #pageContentWrapper .contactStaffMember #contactStaff table {
+        width: min(95vw, 100%) !important;
+    }
+
+    /*Single Page */
+    #STAFF_SINGLE_PAGE_WO_ASIDE.staffPageContactInfo #pageContentWrapper ul#staffContentContactWrapper .staffContactWrapper {
+        /*zoom: 1.3 !important;*/
+    }
+
+    #STAFF_SINGLE_PAGE_WO_ASIDE.staffPageNoPhoto .staffOverviewWrapper {
+        left: 0px !important;
+    }
+
+    #staff.staffR1.staff-v-1 table tr:first-child {
+        display: none;
+    }
+
+    #staff.staffR1.staff-v-1 table tr:nth-child(even),
+    #staff.staffR1.staff-v-1 table tr:nth-child(even) > .light {
+        background: #F5F5F5 !important;
+    }
+
+    #staff.staffR1.staff-v-1 table tr:nth-child(odd),
+    #staff.staffR1.staff-v-1 table tr:nth-child(odd) > .light {
+        background: #fdfafa !important;
+    }
+
+    .staffVerticalremoveNA {
+        display: none !important;
+    }
+
+    #staff.staffR1.staff-v-1 table tr td:first-child {
+        font-size: 1em;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    #staff.staffR1.staff-v-1 .staff-category {
+        margin-top: 2%;
+    }
+
+    /*Single Page */
+    .blur-filter {
+        -webkit-filter: blur(12px);
+        -ms-filter: blur(12px);
+        filter: blur(12px);
+        position: absolute !important;
+    }
+
+    .makePopup {
+        margin-top: 20px;
+        margin-left: 3em;
+        overflow: auto;
+        z-index: 20;
+        opacity: 1.2;
+        border: 0.02em solid rgb(238, 238, 238);
+        width: 75% !important;
+    }
+
+    #pageInnerText {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        /* border: 1px solid rgb(238, 238, 238);*/
+        box-sizing: border-box;
+        text-align: center;
+        align-items: center;
+        font-size: 17px;
+        line-height: 20px;
+        color: #555555;
+        vertical-align: middle;
+        background-color: #fdfdfd;
+        /* border-radius: 5px;*/
+    }
+
+    .triangleCombo:before {
+        float: left;
+        color: gray;
+    }
+
+    .triangleCombo:after {
+        content: "";
+        margin: 0 0.5em;
+        display: inline-block;
+        border: 7px solid transparent;
+        border-top: 8px solid #221e20;
+        border-bottom: 0 none;
+    }
+
+    .triangleCombo {
+        display: inline-block;
+        padding: 0.3em;
+        /* border: solid 1px gray;
+         border-radius: 0.5em;
+         box-shadow: 0 0 0 1px grey;
+         padding-top: -1.1em;
+         border: 0.02em solid rgb(238, 238, 238);*/
+    }
+
+    #wrapperPageInner {
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #pageAsideWrapper.pageAsideLeftWrapper {
+        margin-right: 0px !important;
+    }
+
+    /* The Modal (background) */
+    .en-modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        /*overflow: auto; /* Enable scroll if needed */
+        overflow-y: hidden;
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .en-modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 80%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        max-height: 100%;
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+    @keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+    /* The Close Button */
+    .close {
+        /* color: white;*/
+        float: right;
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .en-modal-header {
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: solid 1px;
+    }
+
+    .en-modal-body {
+        overflow: auto;
+    }
+
+    .model-open {
+        overflow: hidden;
+    }
+
+    .en-modal-header-title span:first-child {
+        text-indent: 0px !important;
+    }
+
+    .en-modal {
+        z-index: 2147483647;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        left: 0;
+        top: 0;
+    }
+
+    .en-editable-block-wrapper h1 {
+        padding-top: 1%;
+        padding-bottom: 1%;
+        margin-top: 1%;
+        line-height: normal;
+    }
+
+    #contactStaff #emailForm input#emailForm_name,
+    #contactStaff #emailForm input#emailForm_email,
+    #contactStaff #emailForm input#emailForm_subject,
+    #contactStaff #emailForm input#emailForm_message {
+        min-width: 250px;
+    }
+}
+
+@media (max-width: 500px) {
+    #staff .staff-categoryStaffMembers {
+        flex-direction: column;
+        font-size: 1.1em !important;
+    }
+
+    #staff.staffR1.staff-horizontal .staff-categoryStaffMember dl dt {
+        font-size: 1.3em;
+    }
+
+    #staff.staffR1.staff-v4 .staff-categoryStaffMember,
+    #staff.staffR1.staff-horizontal .staff-categoryStaffMember {
+        width: 100% !important;
+    }
+
+    #STAFF_MULTI_PAGE_W_ASIDE #pageContentWrapper .contactStaffMember #contactStaff .g-recaptcha,
+    #STAFF_SINGLE_PAGE_WO_ASIDE #pageContentWrapper .contactStaffMember #contactStaff .g-recaptcha {
+        /*transform: scale(0.77);*/
+        transform-origin: 0 0;
+        width: 100%;
+    }
+
+    #STAFF_MULTI_PAGE_W_ASIDE #pageContentWrapper .contactStaffMember #contactStaff table,
+    #STAFF_MULTI_PAGE_W_ASIDE #pageContentWrapper .contactStaffMember #contactStaff table colgroup col,
+    #STAFF_SINGLE_PAGE_WO_ASIDE #pageContentWrapper .contactStaffMember #contactStaff table,
+    #STAFF_SINGLE_PAGE_WO_ASIDE #pageContentWrapper .contactStaffMember #contactStaff table colgroup col {
+        width: 100%;
+    }
+
+    @media (max-width: 400px) {
+        #pageNav ul li b,
+        #pageNav ul li a,
+        #pageNav ul li strong,
+        .en-modal-header-title {
+            font-size: clamp(15px, 2.5vw, 21px);
+        }
+
+        .en-modal-body #pageNav ul {
+            width: 100%;
+        }
+    }
+    @media (max-width: 300px) {
+        .en-modal-header {
+            flex-direction: column-reverse;
+        }
+
+    }
+
+}
+
+
+/*video import */
+#pageContentWrapper .video-list-top input[type="submit"] {
+    padding: unset;
+}
+
+#pageContentWrapper .video-list-top #searchbox2.has-btn, .searchbox2.has-btn {
+    float: left;
+    padding: 3px 3px 4px 5px;
+    border-right: solid 0.5px;
+}
+
+@media (max-width: 1000px) {
+    .video-list li .title {
+        font-size: unset !important;
+    }
+}
+
+@media (max-width: 650px) {
+    .video_player,
+    .video_player video {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .video-list li {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .video-list li a.video-link {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #pageContentWrapper .video-list-top {
+        border-bottom: unset;
+    }
+
+    #pageContentWrapper .video-list-top input[type="submit"],
+    #pageContentWrapper .video-list-top input[type="search"] {
+        width: 100% !important;
+    }
+
+    #pageContentWrapper .video-list-top #controls3 {
+        float: left;
+    }
+
+    #pageContentWrapper .video-list-top .video-list-head,
+    .video-list li .description {
+        display: none;
+    }
+
+    .video-list li .video-list-date {
+        padding: unset !important;
+    }
+}
+
+@media (max-width: 600px) {
+
+    #contactStaff table {
+        line-height: 1.4em;
+        width: min(400px, 90vw) !important;
+    }
+
+    #contactStaff table tr .emailForm_receiver_info {
+        justify-content: center;
+        text-align: center;
+    }
+
+    #contactStaff table tr,
+    #contactStaff table tr td {
+        display: flex;
+        justify-content: center;
+    }
+
+    #contactStaff table tr {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #contactStaff table tr .emailForm_label {
+        padding: 10px 5px 0;
+        line-height: 1;
+        justify-content: flex-start;
+    }
+
+    #contactStaff table tr .emailForm_captcha {
+        display: flex;
+        justify-content: center;
+    }
+
+    #pageContentWrapper .contactStaffMember #contactStaff .g-recaptcha > div:first-of-type {
+        margin-inline: auto;
+    }
+
+}
+
+@media (max-width: 450px) {
+    .video-list li .title,
+    .video-list li .video-list-date,
+    .video-list li .featured-mark {
+        font-size: 5vw !important;
+    }
+}
+
+@media (max-width: 300px) {
+    #contactStaff table tr td {
+        /*width: 60% !important;*/
+        /*align-items: center !important;*/
+    }
+
+    #contactStaff table tr {
+        /*align-items: center !important;*/
+    }
+
+    #contactStaff table tr:nth-child(6) table tr td:nth-child(2) {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #contactStaff table {
+        line-height: 0.9em;
+    }
+
+}
+
+/*video import */
+
+#contactStaff,
+#contactStaff * {
+    box-sizing: border-box;
+}
+
+#contactStaff > form > table {
+    margin-inline: auto;
+}
+
+#contactStaff form table .waInputText {
+    width: 325px;
+}
+
+
+#contactStaff #emailForm {
+    margin-inline: auto;
+}
+
+#contactStaff #emailForm .emailForm_verificationCode {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+@media (max-width: 600px) {
+    #contactStaff #emailForm .emailForm_verificationCode {
+        justify-content: center;
+    }
+}
+
+#contactStaff #emailForm .emailForm_verificationCode .emailForm_verificationCode_input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
