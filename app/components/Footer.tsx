@@ -42,7 +42,7 @@ export default function Footer() {
               <FooterLink href="/principals-message">
                 Principal's Message
               </FooterLink>
-              <FooterLink href="/contact-us">Contact Us</FooterLink>
+              <FooterLink href="/contact">Contact Us</FooterLink>
             </ul>
           </div>
 
@@ -65,7 +65,7 @@ export default function Footer() {
                   href="tel:+12145557890"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  (214) 555-7890
+                  (325) 864-2097
                 </a>
               </li>
               <li className="flex items-start gap-3 group">
@@ -74,7 +74,7 @@ export default function Footer() {
                   href="mailto:info@notredameschool.org"
                   className="text-gray-400 hover:text-white transition-colors break-all"
                 >
-                  info@notredameschool.org
+                  Notrdameinterhighschool@gmail.com
                 </a>
               </li>
             </ul>
