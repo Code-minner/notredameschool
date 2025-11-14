@@ -10,7 +10,8 @@ export default function PrincipalsMessage() {
             Principal’s Message
           </h1>
           <p className="text-lg text-gray-600 mt-3 leading-relaxed">
-            A welcome note from our school leadership
+            A welcome address from our school leadership — committed to
+            excellence, inclusion, and lifelong learning.
           </p>
         </div>
       </section>
@@ -23,13 +24,13 @@ export default function PrincipalsMessage() {
           <div className="bg-white p-4 rounded-xl shadow-md border">
             <Image
               src="/Carmen2.jpg"
-              alt="Principal Photo"
+              alt="Principal Dr. Patricia Smith"
               width={400}
               height={400}
               className="rounded-lg object-cover"
             />
             <div className="mt-4 text-center">
-              <p className="text-xl font-bold text-gray-800">Dr. PATRICIA SMITH</p>
+              <p className="text-xl font-bold text-gray-800">Dr. Patricia Smith</p>
               <p className="text-sm text-gray-500">Principal, Notre Dame School</p>
             </div>
           </div>
@@ -39,47 +40,59 @@ export default function PrincipalsMessage() {
         <div className="lg:col-span-2 space-y-6 text-gray-700 leading-relaxed">
 
           <p className="text-lg">
-            Welcome to Notre Dame School — a place where every learner is valued,
-            every gift is honored, and every milestone is celebrated.
+            Welcome to <strong>Notre Dame School</strong> — a community where
+            every learner is valued, every milestone is celebrated, and every
+            individual’s potential is nurtured with dignity and purpose.
           </p>
 
           <p>
-            For more than sixty years, Notre Dame School has been dedicated to
-            providing an exceptional, faith-centered education to students with
-            developmental disabilities. Our mission begins with recognizing the
-            dignity and unique potential of each student, and continues through
-            individualized instruction, compassionate guidance, and a community
-            built on care and respect.
+            For more than six decades, Notre Dame School has stood as a beacon of
+            compassionate, faith-centered, and inclusive education for students
+            with developmental disabilities. Our mission is rooted in recognizing
+            the dignity and unique gifts of every student, while providing
+            individualized learning experiences that inspire growth and
+            independence.
           </p>
 
           <p>
-            Our teachers and staff are committed to creating an environment
-            where students thrive academically, socially, emotionally, and
-            spiritually. We believe that every student can achieve meaningful
-            growth when supported by research-based instruction, hands-on
-            learning, and a community that encourages independence and
-            self-confidence.
+            As Principal, I am honored to lead a dedicated team of educators who
+            ensure that every classroom fosters academic progress, emotional
+            stability, spiritual enrichment, and a strong sense of belonging.
+            Through evidence-based instruction, adaptive learning strategies, and
+            a warm school community, we guide each student toward meaningful
+            achievements.
           </p>
 
           <p>
-            Notre Dame School's program includes innovative teaching methods,
-            differentiated lessons, and transition skills that prepare students
-            for greater independence and active participation in the
-            community. This holistic approach ensures that each child receives
-            the support and opportunities they need to reach their potential.
+            I work closely with our <strong>Head of Grade Administration,
+            Prof. Jim Lookman</strong>, whose vast experience and strong academic
+            leadership help support our curriculum structure and classroom
+            innovation. His role is essential in ensuring continuity, quality, and
+            excellence across all grade levels.
           </p>
 
           <p>
-            I am honored to serve as Principal of this extraordinary community.
-            I invite you to explore our campus, meet our dedicated educators,
-            and experience the warmth and spirit that make Notre Dame School a
-            remarkable place for students and families.
+            Notre Dame School’s holistic approach includes hands-on learning,
+            community involvement, transition programs, and faith-driven values
+            that prepare our students to become confident, capable, and engaged
+            members of society.
+          </p>
+
+          <p>
+            We warmly welcome families, visitors, and partners to learn more
+            about our programs and discover what makes Notre Dame School a place
+            of hope, excellence, and transformative education.
           </p>
 
           <div className="pt-6">
-            <p className="font-semibold text-gray-900">Faithfully,</p>
-            <p className="font-semibold text-gray-900">Dr. PATRICIA SMITH</p>
-            <p className="text-sm text-gray-500">Principal</p>
+            <p className="font-semibold text-gray-900">Sincerely,</p>
+            <p className="font-semibold text-gray-900">Dr. Patricia Smith</p>
+            <p className="text-sm text-gray-500">Principal, Notre Dame School</p>
+
+            <p className="mt-4 font-semibold text-gray-900">Prof. Jim Lookman</p>
+            <p className="text-sm text-gray-500">
+              Head of Grade Administration
+            </p>
           </div>
 
         </div>
@@ -89,7 +102,7 @@ export default function PrincipalsMessage() {
       <div className="w-full mt-10">
         <Image
           src="/footer-img.jpg"
-          alt="City Landscape"
+          alt="City landscape banner"
           width={1920}
           height={600}
           className="w-full h-auto object-cover shadow-inner"
