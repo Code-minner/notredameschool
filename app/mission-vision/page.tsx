@@ -2,12 +2,12 @@ export default function MissionVision() {
   return (
     <main className="max-w-6xl mx-auto px-6 sm:px-10 py-16">
       {/* Title */}
-      <h1 className="text-4xl sm:text-5xl font-bold text-blue-700 mb-10 tracking-tight text-center sm:text-left">
+      <h1 className="text-4xl sm:text-5xl font-bold text-blue-900 mb-10 tracking-tight text-center sm:text-left">
         Mission & Vision
       </h1>
 
       {/* Mission Statement Box */}
-      <div className="bg-blue-50 border-l-4 border-blue-700 p-6 sm:p-8 mb-8 rounded-r-lg shadow-sm">
+      <div className="bg-blue-50 border-l-4 border-blue-900 p-6 sm:p-8 mb-8 rounded-r-lg shadow-sm">
         <p className="text-lg sm:text-xl leading-relaxed text-gray-800">
           <strong>
             Notre Dame School, recognizing that each person is created in the
@@ -66,15 +66,15 @@ export default function MissionVision() {
 
       {/* Organizational Values */}
       <div className="bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
-        <h2 className="text-2xl font-bold text-blue-700 mb-6 border-b border-gray-200 pb-3">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6 border-b border-gray-200 pb-3">
           Organizational Values
         </h2>
 
         <ul className="space-y-6 text-gray-700">
           <li className="leading-relaxed flex">
-            <span className="inline-block w-2 h-2 bg-blue-700 rounded-full mr-4 mt-2 flex-shrink-0"></span>
+            <span className="inline-block w-2 h-2 bg-blue-900 rounded-full mr-4 mt-2 flex-shrink-0"></span>
             <span>
-              <strong className="text-blue-700">Sponsorship & Ministry:</strong>{" "}
+              <strong className="text-blue-900">Sponsorship & Ministry:</strong>{" "}
               Notre Dame School is under the sponsorship of the School Sisters
               of Notre Dame Central Pacific Province whose mission is expressed
               through ministry directed towards education. For the School
@@ -85,9 +85,9 @@ export default function MissionVision() {
             </span>
           </li>
           <li className="leading-relaxed flex">
-            <span className="inline-block w-2 h-2 bg-blue-700 rounded-full mr-4 mt-2 flex-shrink-0"></span>
+            <span className="inline-block w-2 h-2 bg-blue-900 rounded-full mr-4 mt-2 flex-shrink-0"></span>
             <span>
-              <strong className="text-blue-700">Individual Growth:</strong>{" "}
+              <strong className="text-blue-900">Individual Growth:</strong>{" "}
               Notre Dame School believes each child is a unique individual who
               should have the opportunity to develop to his/her potential in an
               atmosphere of love and genuine concern. As a Catholic educational
@@ -97,9 +97,9 @@ export default function MissionVision() {
             </span>
           </li>
           <li className="leading-relaxed flex">
-            <span className="inline-block w-2 h-2 bg-blue-700 rounded-full mr-4 mt-2 flex-shrink-0"></span>
+            <span className="inline-block w-2 h-2 bg-blue-900 rounded-full mr-4 mt-2 flex-shrink-0"></span>
             <span>
-              <strong className="text-blue-700">Community Inclusion:</strong> We
+              <strong className="text-blue-900">Community Inclusion:</strong> We
               believe in the philosophy of inclusion demonstrated through
               activities to enhance interactions with the broader community.
             </span>
@@ -109,15 +109,15 @@ export default function MissionVision() {
 
       {/* Stats Section */}
       <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="text-center p-6 bg-blue-700 text-white rounded-lg shadow-md">
+        <div className="text-center p-6 bg-blue-900 text-white rounded-lg shadow-md">
           <h3 className="text-3xl sm:text-4xl font-bold mb-2">60+</h3>
           <p className="text-sm sm:text-base">Years of Service</p>
         </div>
-        <div className="text-center p-6 bg-blue-700 text-white rounded-lg shadow-md">
+        <div className="text-center p-6 bg-blue-900 text-white rounded-lg shadow-md">
           <h3 className="text-3xl sm:text-4xl font-bold mb-2">100%</h3>
           <p className="text-sm sm:text-base">Individualized Care</p>
         </div>
-        <div className="text-center p-6 bg-blue-700 text-white rounded-lg shadow-md">
+        <div className="text-center p-6 bg-blue-900 text-white rounded-lg shadow-md">
           <h3 className="text-3xl sm:text-4xl font-bold mb-2">Faith</h3>
           <p className="text-sm sm:text-base">Based Education</p>
         </div>

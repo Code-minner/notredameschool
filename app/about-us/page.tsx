@@ -25,7 +25,7 @@ export default function AboutUs() {
 
       {/* INTRO SECTION */}
       <section className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-blue-700 mb-6">Who We Are</h2>
+        <h2 className="text-3xl font-bold text-blue-900 mb-6">Who We Are</h2>
 
         <p className="text-lg leading-relaxed mb-6">
           Notre Dame School is a faith-based educational community dedicated to
@@ -47,13 +47,13 @@ export default function AboutUs() {
       {/* VALUES GRID */}
       <section className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-700 mb-10">
+          <h2 className="text-3xl font-bold text-blue-900 mb-10">
             Our Core Values
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-6 bg-white shadow-md rounded-lg">
-              <h3 className="text-xl font-semibold text-blue-700 mb-4">
+              <h3 className="text-xl font-semibold text-blue-900 mb-4">
                 Sponsorship & Ministry
               </h3>
               <p className="leading-relaxed">
@@ -64,7 +64,7 @@ export default function AboutUs() {
             </div>
 
             <div className="p-6 bg-white shadow-md rounded-lg">
-              <h3 className="text-xl font-semibold text-blue-700 mb-4">
+              <h3 className="text-xl font-semibold text-blue-900 mb-4">
                 Individual Growth
               </h3>
               <p className="leading-relaxed">
@@ -75,7 +75,7 @@ export default function AboutUs() {
             </div>
 
             <div className="p-6 bg-white shadow-md rounded-lg">
-              <h3 className="text-xl font-semibold text-blue-700 mb-4">
+              <h3 className="text-xl font-semibold text-blue-900 mb-4">
                 Community Inclusion
               </h3>
               <p className="leading-relaxed">
@@ -90,7 +90,7 @@ export default function AboutUs() {
 
       {/* IMAGE GALLERY */}
       <section className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-blue-700 mb-10">
+        <h2 className="text-3xl font-bold text-blue-900 mb-10">
           Life at Notre Dame School
         </h2>
 
@@ -131,7 +131,7 @@ export default function AboutUs() {
       </section>
 
       {/* HISTORY SECTION */}
-      <section className="bg-blue-700 text-white py-16">
+      <section className="bg-blue-900 text-white py-16">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl font-bold mb-6">Our History</h2>
 

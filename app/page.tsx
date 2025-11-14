@@ -4,13 +4,9 @@ import React, { useState, useEffect } from "react";
 import {
   ArrowRight,
   Calendar,
-  MapPin,
-  Phone,
-  Mail,
-  Users,
+  Trophy,
   Award,
-  BookOpen,
-  Heart,
+  GraduationCap,
   Star,
   Clock,
   CheckCircle,
@@ -196,7 +192,9 @@ export default function SchoolLandingPage() {
                   />
                 </div>
                 <h3 className="text-base md:text-xl font-bold">Lower School</h3>
-                <p className="text-sm md:text-base text-red-400 italic font-semibold">Ages 6-15</p>
+                <p className="text-sm md:text-base text-red-400 italic font-semibold">
+                  Ages 6-15
+                </p>
               </div>
 
               {/* Upper School Circle */}
@@ -209,7 +207,9 @@ export default function SchoolLandingPage() {
                   />
                 </div>
                 <h3 className="text-base md:text-xl font-bold">Upper School</h3>
-                <p className="text-sm md:text-base text-red-400 italic font-semibold">Ages 15-23</p>
+                <p className="text-sm md:text-base text-red-400 italic font-semibold">
+                  Ages 15-23
+                </p>
               </div>
             </div>
           </div>
@@ -234,6 +234,125 @@ export default function SchoolLandingPage() {
         </div>
       </section>
 
+      <section className="relative py-16 md:py-24 bg-gradient-to-br from-blue-900 via-blue-900 to-blue-900 overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-400 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-900 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 md:px-8">
+          {/* Award Badge */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-yellow-400 text-gray-900 rounded-full font-bold text-sm md:text-base shadow-xl mb-6">
+              <Trophy className="w-5 h-5" />
+              Excellence Award 2025
+            </div>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+              Grade 12 Best Student
+            </h2>
+            <div className="flex justify-center gap-2 mb-8">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className="w-6 h-6 md:w-8 md:h-8 fill-yellow-400 text-yellow-400"
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+            {/* Image Side */}
+            <div className="relative">
+              {/* Decorative Frame */}
+              <div className="absolute -inset-4 bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-400 rounded-3xl blur-xl opacity-50" />
+
+              {/* Image Container */}
+              <div className="relative bg-white rounded-3xl p-4 shadow-2xl">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gray-200">
+                  {/* Replace this src with your actual image */}
+                  <img
+                    src="best-student.jpeg"
+                    alt="Master Kevin Alon Alvin"
+                    className="w-full h-full object-cover"
+                  />
+
+                  {/* Award Ribbon Overlay */}
+                  <div className="absolute top-6 -right-2 bg-yellow-400 text-gray-900 px-6 py-3 rounded-l-xl shadow-lg">
+                    <div className="flex items-center gap-2">
+                      <Award className="w-5 h-5" />
+                      <span className="font-bold text-sm">Best Student</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Decorative Corner Elements */}
+                <div className="absolute -top-3 -left-3 w-6 h-6 border-t-4 border-l-4 border-yellow-400 rounded-tl-lg" />
+                <div className="absolute -bottom-3 -right-3 w-6 h-6 border-b-4 border-r-4 border-yellow-400 rounded-br-lg" />
+              </div>
+            </div>
+
+            {/* Information Side */}
+            <div className="space-y-6 text-white">
+              <div>
+                <h3 className="text-4xl md:text-5xl font-bold mb-2">
+                  Master Kevin Alon Alvin
+                </h3>
+                <p className="text-xl md:text-2xl text-yellow-400 font-semibold">
+                  Class of 2025
+                </p>
+              </div>
+
+              <div className="h-1 w-24 bg-yellow-400 rounded-full" />
+
+              <div className="space-y-4 text-lg text-blue-100">
+                <p className="leading-relaxed">
+                  We are incredibly proud to honor Master Kevin Alon Alvin as
+                  our Grade 12 Best Student for 2025. His exceptional
+                  dedication, outstanding academic performance, and remarkable
+                  character have set a stellar example for the entire school
+                  community.
+                </p>
+                <p className="leading-relaxed">
+                  Kevin's journey exemplifies the values we hold dear:
+                  perseverance, excellence, and compassion. His achievements
+                  inspire us all to reach for our highest potential.
+                </p>
+              </div>
+
+              {/* Achievement Highlights */}
+              <div className="grid grid-cols-2 gap-4 pt-6">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                  <div className="flex items-center gap-3 mb-2">
+                    <GraduationCap className="w-6 h-6 text-yellow-400" />
+                    <h4 className="font-bold">Academic</h4>
+                  </div>
+                  <p className="text-sm text-blue-100">
+                    Outstanding Excellence
+                  </p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Star className="w-6 h-6 text-yellow-400" />
+                    <h4 className="font-bold">Leadership</h4>
+                  </div>
+                  <p className="text-sm text-blue-100">Exemplary Character</p>
+                </div>
+              </div>
+
+              {/* Congratulations Banner */}
+              <div className="bg-yellow-400 text-gray-900 rounded-2xl p-6 mt-8">
+                <p className="text-2xl md:text-3xl font-bold text-center">
+                  🎉 Congratulations, Kevin! 🎉
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Mission Section - Image Left */}
       <section className="py-16 md:py-32">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
@@ -244,14 +363,16 @@ export default function SchoolLandingPage() {
                 alt="Our Mission"
                 className="w-full h-full object-cover rounded-2xl md:rounded-3xl shadow-xl"
               />
-              <div className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 bg-blue-600 text-white p-6 md:p-8 rounded-xl md:rounded-2xl shadow-2xl max-w-[240px] md:max-w-xs">
+              <div className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 bg-blue-900 text-white p-6 md:p-8 rounded-xl md:rounded-2xl shadow-2xl max-w-[240px] md:max-w-xs">
                 <p className="text-base md:text-lg font-semibold">
                   "Education that transforms lives and builds futures."
                 </p>
               </div>
             </div>
             <div className="space-y-4 md:space-y-6">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">Our Mission</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
+                Our Mission
+              </h2>
               <p className="text-base md:text-xl text-gray-600 leading-relaxed">
                 Recognizing that each person is created in the image of God, we
                 educate students with developmental disabilities and facilitate
@@ -266,7 +387,9 @@ export default function SchoolLandingPage() {
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-blue-600 flex-shrink-0" />
-                    <span className="text-sm md:text-base text-gray-700">{item}</span>
+                    <span className="text-sm md:text-base text-gray-700">
+                      {item}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -292,7 +415,7 @@ export default function SchoolLandingPage() {
             {/* Lower School */}
             <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
               <div className="space-y-4 md:space-y-6">
-                <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-blue-600 text-white rounded-full text-xs md:text-sm font-semibold">
+                <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-blue-900 text-white rounded-full text-xs md:text-sm font-semibold">
                   Ages 6-12
                 </div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
@@ -313,11 +436,13 @@ export default function SchoolLandingPage() {
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-sm md:text-base text-gray-700">{item}</span>
+                      <span className="text-sm md:text-base text-gray-700">
+                        {item}
+                      </span>
                     </li>
                   ))}
                 </ul>
-                <button className="text-blue-600 font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all duration-300 text-sm md:text-base">
+                <button className="text-blue-900 font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all duration-300 text-sm md:text-base">
                   Learn More <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
               </div>
@@ -340,7 +465,7 @@ export default function SchoolLandingPage() {
                 />
               </div>
               <div className="space-y-4 md:space-y-6">
-                <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-blue-600 text-white rounded-full text-xs md:text-sm font-semibold">
+                <div className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-blue-900 text-white rounded-full text-xs md:text-sm font-semibold">
                   Ages 12-22
                 </div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
@@ -360,12 +485,14 @@ export default function SchoolLandingPage() {
                     "Community integration programs",
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-sm md:text-base text-gray-700">{item}</span>
+                      <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-900 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-sm md:text-base text-gray-700">
+                        {item}
+                      </span>
                     </li>
                   ))}
                 </ul>
-                <button className="text-blue-600 font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all duration-300 text-sm md:text-base">
+                <button className="text-blue-900 font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all duration-300 text-sm md:text-base">
                   Learn More <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
               </div>
@@ -386,7 +513,7 @@ export default function SchoolLandingPage() {
                 Stay updated with what's happening at our school
               </p>
             </div>
-            <button className="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center gap-2 transition-colors duration-300 text-sm md:text-base">
+            <button className="text-blue-900 font-semibold hover:text-blue-900 inline-flex items-center gap-2 transition-colors duration-300 text-sm md:text-base">
               View All <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
             </button>
           </div>
@@ -427,14 +554,16 @@ export default function SchoolLandingPage() {
                   />
                 </div>
                 <div className="space-y-2 md:space-y-3">
-                  <div className="text-xs md:text-sm text-blue-600 font-semibold">
+                  <div className="text-xs md:text-sm text-blue-900 font-semibold">
                     {news.date}
                   </div>
-                  <h3 className="text-lg md:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                  <h3 className="text-lg md:text-2xl font-bold text-gray-900 group-hover:text-blue-900 transition-colors duration-300">
                     {news.title}
                   </h3>
-                  <p className="text-sm md:text-base text-gray-600">{news.excerpt}</p>
-                  <button className="text-blue-600 font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all duration-300 text-sm md:text-base">
+                  <p className="text-sm md:text-base text-gray-600">
+                    {news.excerpt}
+                  </p>
+                  <button className="text-blue-900 font-semibold inline-flex items-center gap-2 group-hover:gap-3 transition-all duration-300 text-sm md:text-base">
                     Read More <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                   </button>
                 </div>
@@ -445,7 +574,7 @@ export default function SchoolLandingPage() {
       </section>
 
       {/* Events Section */}
-      <section className="py-12 md:py-16 bg-blue-600 text-white">
+      <section className="py-12 md:py-16 bg-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div className="space-y-3 md:space-y-4 order-2 md:order-1">
@@ -469,7 +598,9 @@ export default function SchoolLandingPage() {
                 >
                   <div className="flex justify-between items-start gap-4">
                     <div>
-                      <h3 className="text-base md:text-xl font-bold mb-1 md:mb-2">{event.title}</h3>
+                      <h3 className="text-base md:text-xl font-bold mb-1 md:mb-2">
+                        {event.title}
+                      </h3>
                       <div className="flex flex-wrap items-center gap-3 md:gap-4 text-blue-100 text-xs md:text-sm">
                         <span className="flex items-center gap-1 md:gap-2">
                           <Calendar className="w-3 h-3 md:w-4 md:h-4" />
@@ -490,7 +621,9 @@ export default function SchoolLandingPage() {
             </div>
 
             <div className="space-y-4 md:space-y-6 order-1 md:order-2">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">Upcoming Events</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+                Upcoming Events
+              </h2>
               <p className="text-base md:text-xl text-blue-100 leading-relaxed">
                 Join us for exciting events throughout the year. From open
                 houses to fundraisers, there's always something happening at our

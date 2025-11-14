@@ -65,7 +65,7 @@ export default function Navbar() {
             <NavLink href="/principals-message">Principal's Message</NavLink>
             <Link
               href="/contact"
-              className="bg-blue-700 text-white px-5 py-2.5 rounded-lg hover:bg-blue-800 font-medium transition-all duration-200 text-sm lg:text-base shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              className="bg-blue-900 text-white px-5 py-2.5 rounded-lg hover:bg-blue-800 font-medium transition-all duration-200 text-sm lg:text-base shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
             >
               Contact Us
             </Link>
@@ -74,7 +74,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden inline-flex items-center justify-center px-1 py-2 bg-red-700 rounded-full text-white  hover:bg-red-300 hover:text-black  focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors duration-200"
+            className="md:hidden inline-flex items-center justify-center px-1 py-2 bg-red-700 rounded-full text-white  hover:bg-red-300 hover:text-black  focus:outline-none focus:ring-2 focus:ring-blue-900 transition-colors duration-200"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
@@ -132,7 +132,7 @@ export default function Navbar() {
           </MobileNavLink>
           <Link
             href="/contact"
-            className="block px-3 py-3 rounded-lg text-base font-medium bg-blue-700 text-white hover:bg-blue-800 transition-colors duration-200 text-center mt-3 shadow-sm"
+            className="block px-3 py-3 rounded-lg text-base font-medium bg-blue-900 text-white hover:bg-blue-800 transition-colors duration-200 text-center mt-3 shadow-sm"
             onClick={() => setMenuOpen(false)}
           >
             Contact Us
@@ -148,10 +148,10 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
     <Link
       href={href}
-      className="relative text-gray-700 hover:text-blue-700 font-medium transition-colors duration-200 text-sm lg:text-base group px-2 py-1"
+      className="relative text-gray-700 hover:text-blue-900 font-medium transition-colors duration-200 text-sm lg:text-base group px-2 py-1"
     >
       {children}
-      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-700 transition-all duration-300 group-hover:w-full"></span>
+      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full"></span>
     </Link>
   );
 }
@@ -161,7 +161,7 @@ function MobileNavLink({ href, onClick, children }: { href: string; onClick: () 
   return (
     <Link
       href={href}
-      className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-700 hover:bg-gray-50 transition-all duration-200 transform hover:translate-x-1"
+      className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-blue-900 hover:bg-gray-50 transition-all duration-200 transform hover:translate-x-1"
       onClick={onClick}
     >
       {children}

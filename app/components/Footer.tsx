@@ -33,7 +33,7 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold text-lg mb-5 relative inline-block">
               Quick Links
-              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-600"></span>
+              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-900"></span>
             </h3>
             <ul className="space-y-3 text-sm">
               <FooterLink href="/">Home</FooterLink>
@@ -50,7 +50,7 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold text-lg mb-5 relative inline-block">
               Contact Us
-              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-600"></span>
+              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-900"></span>
             </h3>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3 group">
@@ -84,11 +84,11 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold text-lg mb-5 relative inline-block">
               Connect With Us
-              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-600"></span>
+              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-900"></span>
             </h3>
 
             {/* Partner Section */}
-            <div className="mb-6 p-4 bg-gray-800 rounded-lg border border-gray-700 hover:border-blue-600 transition-colors">
+            <div className="mb-6 p-4 bg-gray-800 rounded-lg border border-gray-700 hover:border-blue-900 transition-colors">
               <div className="flex items-center gap-3">
                 <img
                   src="/logo (3).png"
@@ -155,7 +155,7 @@ function SocialLink({ href, label, icon }: { href: string; label: string; icon: 
     <a
       href={href}
       aria-label={label}
-      className="w-10 h-10 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 hover:border-blue-600 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
+      className="w-10 h-10 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-900 hover:border-blue-900 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
     >
       <i className={icon}></i>
     </a>

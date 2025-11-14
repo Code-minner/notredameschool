@@ -74,7 +74,7 @@ export default function ContactPage() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
                       placeholder="John Doe"
                     />
                   </div>
@@ -92,7 +92,7 @@ export default function ContactPage() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -106,7 +106,7 @@ export default function ContactPage() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
                         placeholder="(214) 555-1234"
                       />
                     </div>
@@ -123,7 +123,7 @@ export default function ContactPage() {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
                     >
                       <option value="">Select a subject</option>
                       <option value="admissions">Admissions Inquiry</option>
@@ -146,7 +146,7 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all resize-none"
                       placeholder="Tell us how we can help you..."
                     />
                   </div>
@@ -154,7 +154,7 @@ export default function ContactPage() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full md:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-300 inline-flex items-center justify-center gap-2"
+                    className="w-full md:w-auto px-8 py-4 bg-blue-900 hover:bg-blue-900 text-white font-semibold rounded-lg transition-colors duration-300 inline-flex items-center justify-center gap-2"
                   >
                     Send Message <Send className="w-5 h-5" />
                   </button>
@@ -172,7 +172,7 @@ export default function ContactPage() {
                   {/* Address */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-blue-600" />
+                      <MapPin className="w-6 h-6 text-blue-900" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Address</h4>
@@ -186,12 +186,12 @@ export default function ContactPage() {
                   {/* Phone */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-blue-600" />
+                      <Phone className="w-6 h-6 text-blue-900" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Phone</h4>
                       <p className="text-gray-600">
-                        <a href="tel:+12145551234" className="hover:text-blue-600 transition-colors">
+                        <a href="tel:+12145551234" className="hover:text-blue-900 transition-colors">
                           (325) 864-2097
                         </a>
                       </p>
@@ -202,12 +202,12 @@ export default function ContactPage() {
                   {/* Email */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-blue-600" />
+                      <Mail className="w-6 h-6 text-blue-900" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
                       <p className="text-gray-600">
-                        <a href="mailto:info@notredameschool.org" className="hover:text-blue-600 transition-colors">
+                        <a href="mailto:info@notredameschool.org" className="hover:text-blue-900 transition-colors">
                           Notrdameinterhighschool@gmail.com
                         </a>
                       </p>
@@ -217,7 +217,7 @@ export default function ContactPage() {
                   {/* Office Hours */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-blue-600" />
+                      <Clock className="w-6 h-6 text-blue-900" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Office Hours</h4>
@@ -283,7 +283,7 @@ export default function ContactPage() {
               href="https://maps.google.com/?q=2219+Main+Street+Dallas+TX+75201"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-blue-900 hover:text-blue-900 font-semibold transition-colors"
             >
               <MapPin className="w-5 h-5" />
               Get Directions
