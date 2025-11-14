@@ -29,7 +29,7 @@ export default function PrincipalsMessage() {
               className="rounded-lg object-cover"
             />
             <div className="mt-4 text-center">
-              <p className="text-xl font-bold text-gray-800">Prof. Jim Lookman</p>
+              <p className="text-xl font-bold text-gray-800">Dr. PATRICIA SMITH</p>
               <p className="text-sm text-gray-500">Principal, Notre Dame School</p>
             </div>
           </div>
@@ -78,7 +78,7 @@ export default function PrincipalsMessage() {
 
           <div className="pt-6">
             <p className="font-semibold text-gray-900">Faithfully,</p>
-            <p className="font-semibold text-gray-900">Prof. Jim Lookman</p>
+            <p className="font-semibold text-gray-900">Dr. PATRICIA SMITH</p>
             <p className="text-sm text-gray-500">Principal</p>
           </div>
 
