@@ -14,32 +14,33 @@ export default function AboutUs() {
           alt="Notre Dame School campus"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white font-bold drop-shadow-lg">
-            About Notre Dame School
-          </h1>
+        <div className="absolute inset-0 bg-black/50 flex items-end justify-left ">
+          <div className="w-full max-w-6xl mx-auto  flex items-end justify-left text-left block">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white font-bold py-8 px-6 ">
+              About Notre Dame School
+            </h1>
+          </div>
         </div>
       </section>
 
       {/* INTRO SECTION */}
       <section className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-blue-700 mb-6">
-          Who We Are
-        </h2>
+        <h2 className="text-3xl font-bold text-blue-700 mb-6">Who We Are</h2>
 
         <p className="text-lg leading-relaxed mb-6">
           Notre Dame School is a faith-based educational community dedicated to
-          empowering students with developmental disabilities. Since 1963, our mission
-          has been to provide individualized, compassionate, and comprehensive
-          education that helps each student grow academically, socially, emotionally,
-          and spiritually.
+          empowering students with developmental disabilities. Since 1963, our
+          mission has been to provide individualized, compassionate, and
+          comprehensive education that helps each student grow academically,
+          socially, emotionally, and spiritually.
         </p>
 
         <p className="text-lg leading-relaxed">
-          Guided by the School Sisters of Notre Dame, we believe that every child is
-          created in the image of God and deserves the opportunity to develop their
-          unique gifts. With over sixty years of service, Notre Dame School remains a
-          leading institution in Dallas for inclusive, faith-driven education.
+          Guided by the School Sisters of Notre Dame, we believe that every
+          child is created in the image of God and deserves the opportunity to
+          develop their unique gifts. With over sixty years of service, Notre
+          Dame School remains a leading institution in Dallas for inclusive,
+          faith-driven education.
         </p>
       </section>
 
@@ -56,9 +57,9 @@ export default function AboutUs() {
                 Sponsorship & Ministry
               </h3>
               <p className="leading-relaxed">
-                Inspired by the School Sisters of Notre Dame, our mission reflects a
-                commitment to educating the whole person through faith-driven service
-                and academic excellence.
+                Inspired by the School Sisters of Notre Dame, our mission
+                reflects a commitment to educating the whole person through
+                faith-driven service and academic excellence.
               </p>
             </div>
 
@@ -67,9 +68,9 @@ export default function AboutUs() {
                 Individual Growth
               </h3>
               <p className="leading-relaxed">
-                We honor the unique gifts of every student. Through individualized
-                instruction, we help each learner reach their full potential in an
-                atmosphere of love and genuine concern.
+                We honor the unique gifts of every student. Through
+                individualized instruction, we help each learner reach their
+                full potential in an atmosphere of love and genuine concern.
               </p>
             </div>
 
@@ -78,9 +79,9 @@ export default function AboutUs() {
                 Community Inclusion
               </h3>
               <p className="leading-relaxed">
-                Students thrive when connected with their communities. We promote
-                inclusion through meaningful activities that build independence,
-                confidence, and social engagement.
+                Students thrive when connected with their communities. We
+                promote inclusion through meaningful activities that build
+                independence, confidence, and social engagement.
               </p>
             </div>
           </div>
@@ -135,16 +136,17 @@ export default function AboutUs() {
           <h2 className="text-3xl font-bold mb-6">Our History</h2>
 
           <p className="text-lg leading-relaxed mb-6">
-            Founded in 1963 with just two classrooms, Notre Dame School has grown into
-            a thriving educational institution serving families across North Texas.
-            Every chapter of our history reflects our enduring commitment to inclusion,
-            compassion, and academic excellence.
+            Founded in 1963 with just two classrooms, Notre Dame School has
+            grown into a thriving educational institution serving families
+            across North Texas. Every chapter of our history reflects our
+            enduring commitment to inclusion, compassion, and academic
+            excellence.
           </p>
 
           <p className="text-lg leading-relaxed">
             Today, we continue to build on this legacy—embracing innovation in
-            educational practices, strengthening community partnerships, and helping
-            every student realize their God-given potential.
+            educational practices, strengthening community partnerships, and
+            helping every student realize their God-given potential.
           </p>
         </div>
       </section>
