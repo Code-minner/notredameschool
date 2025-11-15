@@ -131,7 +131,7 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all text-gray-900 placeholder:text-gray-400"
-                        placeholder="(214) 555-1234"
+                        placeholder="(325) 864-2097"
                       />
                     </div>
                   </div>
@@ -202,8 +202,8 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Address</h4>
                       <p className="text-gray-600">
-                        2219 Main Street<br />
-                        Dallas, TX 75201
+                      
+                        456 Learning Way,<br /> Dallas, TX 75205
                       </p>
                     </div>
                   </div>
@@ -216,11 +216,11 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Phone</h4>
                       <p className="text-gray-600">
-                        <a href="tel:+12145551234" className="hover:text-blue-600 transition-colors">
-                          (214) 555-1234
+                        <a href="tel:+13258642097" className="hover:text-blue-600 transition-colors">
+                          (325) 864-2097
                         </a>
                       </p>
-                      <p className="text-sm text-gray-500 mt-1">Fax: (214) 555-5678</p>
+                      <p className="text-sm text-gray-500 mt-1">Fax: (325) 864-2097</p>
                     </div>
                   </div>
 
@@ -232,8 +232,8 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
                       <p className="text-gray-600">
-                        <a href="mailto:info@notredameschool.org" className="hover:text-blue-600 transition-colors">
-                          info@notredameschool.org
+                        <a href="mailto:notredameinterhighschool@gmail.com" className="hover:text-blue-600 transition-colors">
+                          notredameinterhighschool@gmail.com
                         </a>
                       </p>
                     </div>
@@ -333,7 +333,7 @@ export default function ContactPage() {
             {[
               {
                 question: "What's the best way to schedule a tour?",
-                answer: "You can schedule a tour by calling us at (214) 555-1234, using the contact form above, or emailing info@notredameschool.org. Tours are available Monday through Friday."
+                answer: "You can schedule a tour by calling us at (325) 864-2097, using the contact form above, or emailing notredameinterhighschool@gmail.com Tours are available Monday through Friday."
               },
               {
                 question: "How quickly will I receive a response?",
@@ -345,7 +345,7 @@ export default function ContactPage() {
               },
               {
                 question: "Who should I contact for admissions questions?",
-                answer: "For admissions inquiries, please select 'Admissions Inquiry' in the contact form above, or call our admissions office directly at (214) 555-1234."
+                answer: "For admissions inquiries, please select 'Admissions Inquiry' in the contact form above, or call our admissions office directly at (325) 864-2097."
               }
             ].map((faq, index) => (
               <div key={index} className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow">

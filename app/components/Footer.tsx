@@ -62,7 +62,7 @@ export default function Footer() {
               <li className="flex items-start gap-3 group">
                 <span className="text-blue-500 mt-0.5 text-base"><Phone className="w-4 h-4" /></span>
                 <a
-                  href="tel:+12145557890"
+                  href="tel:+13258642097"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   (325) 864-2097
@@ -71,10 +71,10 @@ export default function Footer() {
               <li className="flex items-start gap-3 group">
                 <span className="text-blue-500 mt-0.5 text-base"><Mail className="w-4 h-4" /></span>
                 <a
-                  href="mailto:info@notredameschool.org"
+                  href="mailto:notredameinterhighschool@gmail.com"
                   className="text-gray-400 hover:text-white transition-colors break-all"
                 >
-                  Notrdameinterhighschool@gmail.com
+                  notredameinterhighschool@gmail.com
                 </a>
               </li>
             </ul>

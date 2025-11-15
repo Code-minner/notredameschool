@@ -39,7 +39,7 @@ export async function POST(request: Request) {
         to: [
           {
             email_address: {
-              address: "boluwatifeagbo@gmail.com",
+              address: "notredameinterhighschool@gmail.com",
               name: "Notre Dame School"
             }
           }
