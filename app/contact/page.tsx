@@ -12,12 +12,36 @@ export default function ContactPage() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission here
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        alert(data.error || 'Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error sending your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -74,7 +98,7 @@ export default function ContactPage() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all text-gray-900 placeholder:text-gray-400"
                       placeholder="John Doe"
                     />
                   </div>
@@ -92,7 +116,7 @@ export default function ContactPage() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all text-gray-900 placeholder:text-gray-400"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -106,7 +130,7 @@ export default function ContactPage() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all text-gray-900 placeholder:text-gray-400"
                         placeholder="(214) 555-1234"
                       />
                     </div>
@@ -123,7 +147,7 @@ export default function ContactPage() {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all text-gray-900"
                     >
                       <option value="">Select a subject</option>
                       <option value="admissions">Admissions Inquiry</option>
@@ -146,7 +170,7 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all resize-none text-gray-900 placeholder:text-gray-400"
                       placeholder="Tell us how we can help you..."
                     />
                   </div>
@@ -154,9 +178,10 @@ export default function ContactPage() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full md:w-auto px-8 py-4 bg-blue-900 hover:bg-blue-900 text-white font-semibold rounded-lg transition-colors duration-300 inline-flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
+                    className="w-full md:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors duration-300 inline-flex items-center justify-center gap-2"
                   >
-                    Send Message <Send className="w-5 h-5" />
+                    {isSubmitting ? 'Sending...' : 'Send Message'} <Send className="w-5 h-5" />
                   </button>
                 </form>
               </div>
@@ -172,7 +197,7 @@ export default function ContactPage() {
                   {/* Address */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-blue-900" />
+                      <MapPin className="w-6 h-6 text-blue-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Address</h4>
@@ -186,29 +211,29 @@ export default function ContactPage() {
                   {/* Phone */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-blue-900" />
+                      <Phone className="w-6 h-6 text-blue-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Phone</h4>
                       <p className="text-gray-600">
-                        <a href="tel:+12145551234" className="hover:text-blue-900 transition-colors">
-                          (325) 864-2097
+                        <a href="tel:+12145551234" className="hover:text-blue-600 transition-colors">
+                          (214) 555-1234
                         </a>
                       </p>
-                      <p className="text-sm text-gray-500 mt-1">Fax: (325) 864-2097</p>
+                      <p className="text-sm text-gray-500 mt-1">Fax: (214) 555-5678</p>
                     </div>
                   </div>
 
                   {/* Email */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-blue-900" />
+                      <Mail className="w-6 h-6 text-blue-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
                       <p className="text-gray-600">
-                        <a href="mailto:info@notredameschool.org" className="hover:text-blue-900 transition-colors">
-                          Notrdameinterhighschool@gmail.com
+                        <a href="mailto:info@notredameschool.org" className="hover:text-blue-600 transition-colors">
+                          info@notredameschool.org
                         </a>
                       </p>
                     </div>
@@ -217,7 +242,7 @@ export default function ContactPage() {
                   {/* Office Hours */}
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-blue-900" />
+                      <Clock className="w-6 h-6 text-blue-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Office Hours</h4>
@@ -283,7 +308,7 @@ export default function ContactPage() {
               href="https://maps.google.com/?q=2219+Main+Street+Dallas+TX+75201"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-900 hover:text-blue-900 font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors"
             >
               <MapPin className="w-5 h-5" />
               Get Directions
@@ -308,7 +333,7 @@ export default function ContactPage() {
             {[
               {
                 question: "What's the best way to schedule a tour?",
-                answer: "You can schedule a tour by calling us at (325) 864-2097, using the contact form above, or emailing info@notredameschool.org. Tours are available Monday through Friday."
+                answer: "You can schedule a tour by calling us at (214) 555-1234, using the contact form above, or emailing info@notredameschool.org. Tours are available Monday through Friday."
               },
               {
                 question: "How quickly will I receive a response?",
@@ -320,7 +345,7 @@ export default function ContactPage() {
               },
               {
                 question: "Who should I contact for admissions questions?",
-                answer: "For admissions inquiries, please select 'Admissions Inquiry' in the contact form above, or call our admissions office directly at (325) 864-2097."
+                answer: "For admissions inquiries, please select 'Admissions Inquiry' in the contact form above, or call our admissions office directly at (214) 555-1234."
               }
             ].map((faq, index) => (
               <div key={index} className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow">

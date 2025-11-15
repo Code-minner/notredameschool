@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: "Notre Dame School",
   description:
     "Welcome to Notre Dame School – Inspiring excellence in education and character.",
+      icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
