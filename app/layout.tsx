@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description:
     "Welcome to Notre Dame School – Inspiring excellence in education and character.",
       icons: {
-    icon: "/logo.png",
+    icon: "https://www.notredameinterhighschool.com/logo.png",
   },
 };
 
